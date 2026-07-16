@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Mastering Web Development in 2025",
+    "description": "Explore the latest trends in web development, including AI-driven tools, Next.js 15, and modern CSS frameworks.",
+    "image": "/images/blog/web-dev-2025.jpg",
+    "category": "Technology",
+    "date": "2025-09-01"
+  },
+  {
+    "id": 2,
+    "title": "The Future of AI in Content Creation",
+    "description": "Learn how AI tools like Grok are transforming content creation with automation and personalization.",
+    "image": "/images/blog/ai-content.jpg",
+    "category": "AI",
+    "date": "2025-08-15"
+  },
+  {
+    "id": 3,
+    "title": "Building Scalable APIs with Node.js",
+    "description": "A guide to creating robust APIs using Node.js, Express, and JSON for dynamic blog platforms.",
+    "image": "/images/blog/node-api.jpg",
+    "category": "Backend",
+    "date": "2025-07-30"
+  }
+]
