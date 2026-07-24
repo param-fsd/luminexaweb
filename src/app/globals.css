@@ -274,13 +274,33 @@
   animation: lumen-pulse 2.2s ease-in-out infinite;
 }
 
-/* Preloader — gentle breathing pulse on the logo */
-@keyframes loader-breathe {
-  0%, 100% { transform: scale(1);    opacity: 0.8; }
-  50%      { transform: scale(1.09); opacity: 1; }
+/* Preloader — Luminexa logo reveal (wordmark blur-in + mark fly-in + sheen) */
+.logo-reveal [style*="animation:lx"] {
+  animation-iteration-count: 1 !important;
 }
-.loader-breathe {
-  animation: loader-breathe 1.8s ease-in-out infinite;
+
+@keyframes lxIconMove {
+  0%   { transform: translate(1050.7px,1049.3px) scale(0.06);   opacity: 0; }
+  16%  { transform: translate(1050.7px,1049.3px) scale(0.2996); opacity: 1;
+         animation-timing-function: cubic-bezier(.4,0,1,1); }
+  38%  { transform: translate(1050.7px,1049.3px) scale(0.2996);
+         animation-timing-function: cubic-bezier(.22,1,.36,1); }
+  82%  { transform: translate(2281.9px,1244.5px) scale(0.1739); }
+  100% { transform: translate(2281.9px,1244.5px) scale(0.1739); }
+}
+@keyframes lxIconSpin {
+  0%   { transform: rotate(-16deg); }
+  16%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes lxLetterIn {
+  0%   { opacity: 0; transform: translateY(26px) scale(.985); filter: blur(3px); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0); }
+}
+@keyframes lxSheen {
+  0%, 74% { transform: translateX(-2600px) skewX(-16deg); opacity: 0; }
+  83%     { opacity: .38; }
+  100%    { transform: translateX(1200px) skewX(-16deg); opacity: 0; }
 }
 
 /* Preloader progress bar fill */
@@ -302,5 +322,9 @@
   .lumen-pulse,
   .animate-in {
     animation: none !important;
+  }
+  .logo-reveal [style*="animation:lx"] {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
   }
 }

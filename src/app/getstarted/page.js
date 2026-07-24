@@ -71,6 +71,7 @@ const EnquiryForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const solutionOptions = useMemo(
     () => [
@@ -125,6 +126,9 @@ const EnquiryForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    setSubmitError("");
 
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -146,7 +150,7 @@ const EnquiryForm = () => {
           {
             contactName: formData.name.trim(),
             designation: formData.designation.trim(),
-            emailId: formData.email.trim(),
+            emailId: formData.email.trim().toLowerCase(),
             mobileNumber: formData.mobile.trim(),
             otherDetails: "",
           },
@@ -182,7 +186,9 @@ const EnquiryForm = () => {
       }, 3000);
     } catch (error) {
       console.error("Error submitting lead:", error);
-      alert("Something went wrong while submitting. Please try again.");
+      setSubmitError(
+        "We couldn't submit your enquiry. Please check your connection and try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -549,6 +555,15 @@ const EnquiryForm = () => {
                     <Send className="mr-2 size-4" />
                     {isSubmitting ? "Submitting..." : "Submit Enquiry"}
                   </Button>
+
+                  {submitError && (
+                    <p
+                      role="alert"
+                      className="text-center text-xs text-destructive sm:col-span-2"
+                    >
+                      {submitError}
+                    </p>
+                  )}
 
                   <div className="flex items-center gap-2 text-[11px] leading-5 text-muted-foreground sm:col-span-2">
                     <ArrowUpRight className="size-3.5 shrink-0 text-primary" />
