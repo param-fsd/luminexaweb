@@ -18,6 +18,7 @@ import {
   Layers,
 } from "lucide-react";
 import services from "@/data/serviceData";
+import VirtualTourPage from "@/components/services/VirtualTourPage";
 
 /* -------------------------------------------------------------------------- */
 /* Background                                                                  */
@@ -178,6 +179,10 @@ const ServiceDetails = () => {
         <p className="text-base text-foreground">Service not found</p>
       </div>
     );
+  }
+
+  if (slug === "360-virtual-tour") {
+    return <VirtualTourPage service={service} />;
   }
 
   const heroImage = service.image || "/placeholder.jpg";

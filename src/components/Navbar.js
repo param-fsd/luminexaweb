@@ -109,10 +109,10 @@ const Navbar = ({ isScrolled }) => {
         {
           heading: "Immersive & Mapping",
           items: [
-            { href: "/services/augmented-reality", label: "nexAR — WebAR", icon: ScanLine },
+            { href: "/services/mapping", label: "Mapping & GIS", icon: Map },
             { href: "/services/360-virtual-tour", label: "360° Virtual Tour", icon: Camera },
             { href: "/services/3d-visualization", label: "3D Visualization", icon: Box },
-            { href: "/services/mapping", label: "Mapping & GIS", icon: Map },
+            { href: "/services/augmented-reality", label: "nexAR — WebAR", icon: ScanLine },
           ],
         },
       ],

@@ -29,6 +29,7 @@ import {
   Quote,
 } from "lucide-react";
 import services from "@/data/serviceData";
+import ImageMappingPage from "@/components/services/ImageMappingPage";
 import SectionHeader from "@/components/motion/SectionHeader";
 import Marquee from "@/components/motion/Marquee";
 import Counter from "@/components/motion/Counter";
@@ -181,6 +182,11 @@ const SubServiceDetails = () => {
         <p className="text-base text-foreground">Sub-service not found</p>
       </div>
     );
+  }
+
+  /* sub-services with a bespoke layout opt out of the generic template */
+  if (slug === "mapping" && subSlug === "image-mapping") {
+    return <ImageMappingPage service={service} subService={subService} />;
   }
 
   const heroImage =

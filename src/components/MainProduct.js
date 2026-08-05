@@ -1,28 +1,34 @@
 "use client";
 
+/**
+ * Home · section 03 — Visualization.
+ *
+ * Implements variant "1a — Editorial refine (light)" from the `Luminexa Section.dc.html`
+ * design doc (Claude Design project "Hi UI UX Redesign"). The doc's raw hex values are
+ * mapped onto the site's tokens rather than hard-coded: #c6f24e → `lumen`,
+ * #0e0e10 → `foreground`, #ececed → `border`, #6b6b70 → `muted-foreground`.
+ *
+ * The doc's <image-slot> placeholder is a design-canvas element, not something that
+ * ships — here it resolves to the section's existing /vid1.mp4 loop, which already
+ * carried the doc's "Live preview" badge.
+ */
+
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Badge } from "./ui/badge";
-import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
+import Image from "next/image";
 import {
-  Star,
-  MapPinned,
-  Rotate3d,
-  Box,
-  ArrowRight,
   ArrowUpRight,
-  ShieldCheck,
-  Navigation,
-  Map,
-  Crosshair,
-  Layers,
-  Gauge,
-  FileText,
-  MousePointerClick,
+  Box,
   Check,
+  FileText,
+  Gauge,
+  Map,
+  MousePointerClick,
+  Navigation,
+  Rotate3d,
 } from "lucide-react";
+import { Button } from "./ui/button";
 
 /* -------------------------------------------------------------------------- */
 /*  Motion variants                                                            */
@@ -42,113 +48,114 @@ const item = {
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Feature data                                                               */
+/*  Content                                                                    */
 /* -------------------------------------------------------------------------- */
 const features = [
   {
-    icon: MapPinned,
-    title: "Image Mapping",
+    icon: Map,
+    title: "Image mapping",
     description:
-      "Tap any plot to instantly view dimensions, pricing, availability, and documents.",
+      "Tap any plot to open dimensions, pricing, availability and documents instantly.",
   },
   {
     icon: Rotate3d,
-    title: "360° Virtual Tours",
+    title: "360° virtual tours",
     description:
-      "Immersive walkthroughs and aerial perspectives to explore remotely, anytime.",
+      "Immersive walkthroughs and aerial perspectives explored remotely, anytime.",
   },
   {
     icon: Box,
-    title: "3D Immersive Experience",
+    title: "3D immersive preview",
     description:
-      "Photoreal 3D previews of future projects for confident decision-making.",
+      "Photoreal 3D of future phases for confident, faster decision-making.",
+  },
+  {
+    icon: Navigation,
+    title: "Smart routing",
+    description:
+      "Live directions, ETA and branded overlays with one-tap QR share links.",
   },
 ];
 
-const userActions = [
+const buyerActions = [
   "Tap plots to open details instantly",
   "View floor plans, images & PDFs",
   "Explore via 360° tours & hotspots",
   "See 3D renders for future phases",
+  "Get live routes & travel time",
+  "Open or share navigation via QR",
 ];
 
 const quickStats = [
-  { icon: MousePointerClick, label: "Tap-to-View", sub: "Instant details" },
-  { icon: FileText, label: "Docs & Plans", sub: "Floor plans, PDFs" },
+  { icon: MousePointerClick, label: "Tap-to-view", sub: "Instant details" },
+  { icon: FileText, label: "Docs & plans", sub: "Floor plans, PDFs" },
   { icon: Gauge, label: "Fast UX", sub: "Smooth navigation" },
 ];
 
+/* Hotspot positions are percentage-based so they track the media as it scales. */
+const hotspots = [
+  { top: "28%", left: "22%", delay: "0s" },
+  { top: "57%", left: "55%", delay: "0.8s" },
+  { top: "39%", left: "79%", delay: "1.5s" },
+];
+
+/* Space Grotesk — the doc's display face, already loaded by the root layout. */
+const DISPLAY = { fontFamily: "var(--font-body), 'Space Grotesk', sans-serif" };
+
+/* -------------------------------------------------------------------------- */
+
 const MainProduct = () => {
   return (
-    <section className="relative w-full py-14 md:py-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {/* ================= HEADER — title left, CTAs right ================= */}
+    <section className="relative w-full py-14 md:py-20">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        {/* ================= HEADER ================= */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-end gap-6"
+          className="flex flex-wrap items-end justify-between gap-8"
         >
-          <motion.div variants={item} className="max-w-2xl">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center justify-center h-6 min-w-6 px-1.5 rounded-md bg-lumen text-lumen-foreground text-[11px] font-bold tracking-wide">
+          <motion.div variants={item} className="max-w-[680px]">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span
+                className="inline-flex h-[26px] items-center justify-center rounded-full bg-lumen px-3 text-[12px] font-bold text-lumen-foreground"
+                style={DISPLAY}
+              >
                 03
               </span>
-              <Badge variant="secondary" className="rounded-full px-4 py-1">
+              <span
+                className="rounded-full bg-muted px-3.5 py-1.5 text-[12px] font-semibold text-foreground"
+                style={DISPLAY}
+              >
                 Visualization
-              </Badge>
-              <span className="hidden sm:inline-flex text-[11px] px-3 py-1 rounded-full bg-muted/40 border border-border text-muted-foreground">
-                Mapping • Tours • 3D
+              </span>
+              <span className="rounded-full border border-border px-3.5 py-1.5 text-[12px] text-muted-foreground">
+                Mapping · Tours · 3D
               </span>
             </div>
 
             <h2
-              className="mt-5 text-[26px] sm:text-[34px] md:text-[40px] font-bold text-foreground leading-[1.12]"
-              style={{
-                fontFamily: "var(--font-display, 'Montserrat', sans-serif)",
-                letterSpacing: "-0.04em",
-              }}
+              className="mt-5 text-[30px] font-bold leading-[1.04] tracking-[-.02em] text-foreground sm:text-[38px] lg:text-[50px]"
+              style={DISPLAY}
             >
-              Transforming <span className="lumen-mark">Real Estate</span> with{" "}
-              <span className="display-title-light text-foreground/60">
-                Cutting-Edge
-              </span>{" "}
-              Visualization
+              Transforming real estate with
+              <br />
+              <em className="lumen-mark font-normal italic">cutting-edge</em>{" "}
+              visualization.
             </h2>
-
-            <p className="mt-4 text-[13px] sm:text-[14px] md:text-[15px] text-muted-foreground leading-relaxed">
-              We build interactive visualization systems for layouts, villas, and
-              large-scale projects — so buyers, investors, and teams can explore
-              faster, compare options, and make decisions with clarity.
-            </p>
           </motion.div>
 
-          <motion.div variants={item} className="flex flex-wrap gap-3 lg:pb-1">
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full h-11 px-6 text-sm font-semibold group bg-foreground text-background hover:bg-foreground/90 transition-all duration-200"
-            >
-              <Link href="/services/nexnet">
-                Explore Visualization
-                <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-lumen text-lumen-foreground transition-transform duration-200 group-hover:translate-x-1">
-                  <ArrowRight className="size-3.5" />
-                </span>
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="rounded-full h-11 px-6 text-sm font-semibold border-foreground/20 hover:bg-foreground hover:text-background transition-all duration-200"
-            >
-              <Link href="/contact-us">Request Demo</Link>
-            </Button>
-          </motion.div>
+          <motion.p
+            variants={item}
+            className="max-w-[340px] text-[15.5px] leading-[1.55] text-muted-foreground"
+          >
+            One map-driven surface — plots, floor plans, renders and live
+            routing — so prospects qualify themselves before the first call.
+          </motion.p>
         </motion.div>
 
-        {/* ================= VIDEO — aligned to the container ================= */}
+        {/* ================= VIDEO — full width, as before ================= */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -160,7 +167,7 @@ const MainProduct = () => {
             <div className="aspect-[16/8]">
               <video
                 src="/vid1.mp4"
-                className="w-full h-full object-cover"
+                className="size-full object-cover"
                 autoPlay
                 muted
                 loop
@@ -169,8 +176,8 @@ const MainProduct = () => {
               />
             </div>
 
-            <span className="absolute top-3.5 left-3.5 inline-flex items-center gap-2 rounded-full bg-black/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-lumen lumen-pulse" />
+            <span className="absolute left-3.5 top-3.5 inline-flex items-center gap-2 rounded-full bg-black/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
+              <span className="lumen-pulse size-1.5 rounded-full bg-lumen" />
               Live preview
             </span>
           </div>
@@ -186,202 +193,187 @@ const MainProduct = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4"
+          className="mt-10 grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:mt-12 lg:grid-cols-4"
         >
-          {features.map((f) => {
-            const Icon = f.icon;
-            return (
-              <motion.div
-                key={f.title}
-                variants={item}
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 220, damping: 18 }}
-                className="rounded-[18px] border border-border bg-background/70 backdrop-blur p-5 hover:border-lumen transition-colors duration-300"
+          {features.map(({ icon: Icon, title, description }) => (
+            <motion.div
+              key={title}
+              variants={item}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 220, damping: 18 }}
+              className="rounded-[20px] border border-border px-6 pb-[30px] pt-[26px] transition-colors duration-200 hover:border-foreground"
+            >
+              <div className="flex size-11 items-center justify-center rounded-[13px] bg-lumen">
+                <Icon className="size-[21px] text-lumen-foreground" />
+              </div>
+              <h3
+                className="mb-2 mt-5 text-[18px] font-semibold text-foreground"
+                style={DISPLAY}
               >
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-lumen">
-                    <Icon className="size-5 text-lumen-foreground" />
-                  </span>
-                  <div className="text-[14px] sm:text-[15px] font-semibold text-foreground">
-                    {f.title}
-                  </div>
-                </div>
-                <p className="mt-3 text-[12px] sm:text-[13px] text-muted-foreground leading-relaxed">
-                  {f.description}
-                </p>
-              </motion.div>
-            );
-          })}
+                {title}
+              </h3>
+              <p className="text-[14px] leading-[1.5] text-muted-foreground">
+                {description}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* ================= EXPERIENCE + MAP PANEL ================= */}
-        <div className="mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-5 lg:gap-6 items-stretch">
-          {/* LEFT — what users can do + quick stats */}
+        {/* ================= EXPERIENCE + MEDIA ================= */}
+        <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-[1.05fr_1fr]">
+          {/* LEFT — dark panel */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, ease: "easeOut" }}
-            className="flex flex-col rounded-[20px] border border-border bg-background/70 backdrop-blur p-5 sm:p-6"
+            className="flex flex-col rounded-[22px] bg-foreground p-7 text-background sm:p-10"
           >
-            <div className="section-label">Inside the experience</div>
-            <div className="mt-2 text-[16px] sm:text-[18px] font-bold text-foreground">
-              What users can do
+            <div
+              className="text-[12px] font-semibold uppercase tracking-[.14em] text-lumen"
+              style={DISPLAY}
+            >
+              Inside the experience
+            </div>
+            <h3
+              className="mb-6 mt-3 text-[26px] font-semibold text-background"
+              style={DISPLAY}
+            >
+              What your buyers can do
+            </h3>
+
+            <div className="grid grid-cols-1 gap-x-[30px] gap-y-4 sm:grid-cols-2">
+              {buyerActions.map((action) => (
+                <div
+                  key={action}
+                  className="flex items-start gap-3 text-[14.5px] leading-[1.4] text-background/85"
+                >
+                  <span className="mt-0.5 flex size-[19px] shrink-0 items-center justify-center rounded-full bg-lumen">
+                    <Check
+                      className="size-[11px] text-lumen-foreground"
+                      strokeWidth={3}
+                    />
+                  </span>
+                  {action}
+                </div>
+              ))}
             </div>
 
-            <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
-              {userActions.map((t) => (
-                <li key={t} className="flex items-start gap-2.5">
-                  <span className="mt-0.5 inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-lumen">
-                    <Check className="size-3 text-lumen-foreground" />
+            <div className="mt-auto flex flex-wrap gap-x-[34px] gap-y-5 border-t border-background/10 pt-6">
+              {quickStats.map(({ icon: Icon, label, sub }) => (
+                <div key={label} className="flex items-center gap-3">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-background/15">
+                    <Icon className="size-4 text-lumen" />
                   </span>
-                  <span className="text-[13px] text-muted-foreground leading-relaxed">
-                    {t}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-auto pt-5">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-dashed border-border pt-5">
-                {quickStats.map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <div key={s.label} className="flex items-center gap-3">
-                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-border bg-muted/30">
-                        <Icon className="size-4 text-foreground" />
-                      </span>
-                      <div className="min-w-0">
-                        <div className="text-[12px] font-semibold text-foreground">
-                          {s.label}
-                        </div>
-                        <div className="text-[11px] text-muted-foreground">
-                          {s.sub}
-                        </div>
-                      </div>
+                  <div>
+                    <div
+                      className="text-[15px] font-bold text-background"
+                      style={DISPLAY}
+                    >
+                      {label}
                     </div>
-                  );
-                })}
-              </div>
+                    <div className="text-[12.5px] text-background/55">
+                      {sub}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
-          {/* RIGHT — interactive map panel */}
+          {/* RIGHT — media + product card */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            className="w-full"
+            className="flex flex-col rounded-[22px] border border-border p-3.5"
           >
-            <Card className="relative h-full overflow-hidden rounded-[20px] border border-border bg-background/70 backdrop-blur shadow-sm py-0">
-              <div
-                className="absolute inset-0 opacity-[0.06]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(0,0,0,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.22) 1px, transparent 1px)",
-                  backgroundSize: "28px 28px",
-                }}
+            <div className="relative h-[230px] overflow-hidden rounded-[14px]">
+              <Image
+                src="/inter.webp"
+                alt="Interactive map UI preview"
+                fill
+                className="object-cover"
+                sizes="(max-width:1024px) 100vw, 45vw"
               />
-              <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-lumen/15 blur-3xl" />
 
-              <CardContent className="relative z-10 flex h-full flex-col p-5 sm:p-6">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-lumen">
-                      <Map className="size-5 text-lumen-foreground" />
-                    </span>
-                    <div className="min-w-0">
-                      <div className="text-[13px] sm:text-[14px] font-semibold text-foreground">
-                        Interactive Map UI
-                      </div>
-                      <div className="text-[11px] text-muted-foreground">
-                        Tap plots • hotspots • navigation
-                      </div>
-                    </div>
+              {/* doc's pulsing plot markers */}
+              <div className="pointer-events-none absolute inset-0">
+                {hotspots.map((h) => (
+                  <span
+                    key={`${h.top}-${h.left}`}
+                    className="lumen-pulse absolute size-3.5 rounded-full bg-lumen shadow-[0_0_0_5px_rgba(200,246,60,.35)]"
+                    style={{
+                      top: h.top,
+                      left: h.left,
+                      animationDelay: h.delay,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-foreground/80 px-2.5 py-1.5 text-[11px] font-semibold text-background backdrop-blur">
+                <span className="size-1.5 rounded-full bg-lumen" />
+                Live preview
+              </span>
+            </div>
+
+            <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
+              <div className="flex items-center gap-3">
+                <div className="flex size-[38px] shrink-0 items-center justify-center rounded-[11px] bg-lumen">
+                  <Map className="size-[19px] text-lumen-foreground" />
+                </div>
+                <div>
+                  <div
+                    className="text-[16px] font-semibold text-foreground"
+                    style={DISPLAY}
+                  >
+                    Interactive map UI
                   </div>
+                  <div className="text-[12.5px] text-muted-foreground">
+                    Tap plots · hotspots · navigation
+                  </div>
+                </div>
+              </div>
 
-                  <span className="inline-flex items-center gap-1.5 text-[10px] px-3 py-1 rounded-full bg-muted/40 border border-border text-muted-foreground">
-                    <span className="h-1.5 w-1.5 rounded-full bg-lumen lumen-pulse" />
-                    Live
+              <div className="mt-4 flex gap-2">
+                {["Plot focus", "Visual", "Layers"].map((chip) => (
+                  <span
+                    key={chip}
+                    className="flex-1 rounded-[10px] border border-border py-2.5 text-center text-[12.5px] text-foreground/75"
+                  >
+                    {chip}
                   </span>
-                </div>
+                ))}
+              </div>
 
-                <div className="mt-4 grid grid-cols-3 gap-2">
-                  {[
-                    { icon: Crosshair, label: "Plot Focus" },
-                    { icon: Navigation, label: "Visual" },
-                    { icon: Layers, label: "Layers" },
-                  ].map((it) => {
-                    const Icon = it.icon;
-                    return (
-                      <div
-                        key={it.label}
-                        className="rounded-xl border border-border bg-muted/25 px-3 py-2.5 flex items-center gap-2"
-                      >
-                        <Icon className="size-4 shrink-0 text-foreground" />
-                        <div className="text-[11px] text-muted-foreground leading-tight">
-                          {it.label}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+              <p className="mb-[18px] mt-4 text-[13.5px] leading-[1.5] text-muted-foreground">
+                Reduce back-and-forth by showing plot info, floor plans,
+                renders and CTAs inside one clean, map-driven experience.
+              </p>
 
-                <div className="mt-4 flex-1 rounded-[16px] border border-border bg-muted/25 p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1">
-                      {Array.from({ length: 5 }).map((_, idx) => (
-                        <Star
-                          key={idx}
-                          className="w-4 h-4 text-foreground/80 fill-foreground/80"
-                        />
-                      ))}
-                    </div>
-                    <span className="text-[10px] px-3 py-1 rounded-full bg-background/60 border border-border text-muted-foreground">
-                      Trusted
+              <div className="mt-auto flex flex-wrap gap-2.5">
+                <Button
+                  asChild
+                  className="group h-auto rounded-full bg-foreground py-2.5 pl-5 pr-2.5 text-[14px] font-semibold text-background hover:bg-foreground/90"
+                >
+                  <Link href="/contact-us">
+                    Talk to us
+                    <span className="ml-2 flex size-[26px] items-center justify-center rounded-full bg-lumen transition-transform duration-200 group-hover:translate-x-0.5">
+                      <ArrowUpRight className="size-3.5 text-lumen-foreground" />
                     </span>
-                  </div>
-
-                  <p className="mt-3 text-[12px] sm:text-[13px] text-muted-foreground leading-relaxed">
-                    Reduce back-and-forth by showing plot info, floor plans,
-                    renders, and CTAs inside a clean map-driven experience.
-                  </p>
-
-                  <div className="mt-4 flex items-start gap-3">
-                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-lumen">
-                      <ShieldCheck className="size-4.5 text-lumen-foreground" />
-                    </span>
-                    <div>
-                      <div className="text-[13px] font-semibold text-foreground">
-                        AI Integration
-                      </div>
-                      <div className="text-[11px] text-muted-foreground">
-                        Smart insights, faster qualification, better decisions.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 flex flex-col sm:flex-row gap-3">
-                  <Button
-                    asChild
-                    className="rounded-full px-5 font-semibold bg-foreground text-background hover:bg-foreground/90"
-                  >
-                    <Link href="/contact-us">
-                      Talk to us <ArrowUpRight className="ml-1.5 size-4" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="rounded-full px-5 font-semibold border-foreground/20 hover:bg-foreground hover:text-background"
-                  >
-                    <Link href="/portfolio">View Work</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-auto rounded-full border-border px-5 py-[11px] text-[14px] font-semibold hover:bg-foreground hover:text-background"
+                >
+                  <Link href="/portfolio">View work</Link>
+                </Button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

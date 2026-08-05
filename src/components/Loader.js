@@ -21,7 +21,7 @@ import React, { useEffect, useRef, useState } from "react";
 // SVG reveal markup ported from the exported "Luminexa Logo Reveal" design.
 // Injected as HTML so the inline animation styles carry over verbatim.
 const REVEAL_SVG = `
-<svg viewBox="120 1180 2760 660" style="width:min(64vw,230px);height:auto;overflow:visible" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="120 1180 2760 660" style="width:min(52vw,190px);height:auto;overflow:visible" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <clipPath id="lx-mark">
       <path d="M846.3,1343.55V1516.7c0,1.43,0,2.84,0,4.24v.1q-.12,7.07-.68,13.79a168.06,168.06,0,0,1-9,43.47,124.29,124.29,0,0,1-30.79,48.2c-15,14.54-34.94,25-58,31.47-18.3,5.12-38.59,7.68-60,7.68H267.45v-321.9h107.2V1578.3H540.11q-9.71-27-9.71-61.6V1343.55H640.6v170q0,36,13,51.07a41.84,41.84,0,0,0,22.49,13.68,54.08,54.08,0,0,0,12.61,1.4,55.49,55.49,0,0,0,12.8-1.4,41.11,41.11,0,0,0,22.52-13.68q12.82-15.06,12.83-51.07v-170Z"></path>

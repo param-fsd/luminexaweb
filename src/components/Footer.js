@@ -174,12 +174,13 @@ const Footer = () => {
           {[
             {
               title: "Product",
+              /* hrefs mirror the `slug` values in @/data/serviceData */
               links: [
-                { label: "Image Mapping", href: "/features" },
-                { label: "nexAR", href: "/services/nexar" },
-                { label: "360 Virtual Tour", href: "/services/nexnet/360-virtual-tour" },
-                { label: "3D Immersive", href: "/services" },
-                { label: "AI-Powered Solutions", href: "/services" },
+                { label: "Image Mapping", href: "/services/mapping/image-mapping" },
+                { label: "nexAR", href: "/services/augmented-reality" },
+                { label: "360 Virtual Tour", href: "/services/360-virtual-tour" },
+                { label: "3D Immersive", href: "/services/3d-visualization" },
+                { label: "AI-Powered Solutions", href: "/services/artificial-intelligence" },
                 { label: "All Services", href: "/services" },
               ],
             },
@@ -228,10 +229,26 @@ const Footer = () => {
         </div>
 
         {/* ================= GIANT WORDMARK ================= */}
+        {/*
+          The brand SVG is a set of filled paths with no `fill` of its own, so it
+          is painted through a CSS mask rather than an <img>. That keeps the mark
+          tintable from the theme (bg-foreground/15 reads as the same faint tone
+          the outlined type used to) instead of baking in solid black.
+        */}
         <div className="mt-14 select-none" aria-hidden>
-          <p className="display-outline text-center leading-none text-[15vw] sm:text-[13vw] lg:text-[150px] tracking-tight">
-            LUMINEXA
-          </p>
+          <div
+            className="aspect-[2465/331] w-full bg-foreground/15"
+            style={{
+              maskImage: "url(/luminexaLogo.svg)",
+              WebkitMaskImage: "url(/luminexaLogo.svg)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+            }}
+          />
         </div>
 
         {/* ================= DIVIDER ================= */}
