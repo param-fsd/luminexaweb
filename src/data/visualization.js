@@ -113,7 +113,7 @@ const nex3dServices = [
 
     stats: [
       { value: "Live", label: "Inventory, not a nightly export" },
-      { value: "6 wks", label: "Typical first twin delivered" },
+      { value: "1 month", label: "Typical first twin delivered" },
       { value: "0", label: "Double-sold units" },
     ],
 

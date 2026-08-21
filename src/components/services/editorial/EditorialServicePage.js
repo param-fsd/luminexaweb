@@ -1,7 +1,8 @@
 "use client";
 
 /**
- * Renders a bespoke service page from a content object plus a hero widget.
+ * Renders a bespoke service page from a content object plus an optional hero
+ * widget. Omit `hero` and the hero copy runs full width.
  *
  * Every section is optional — omit a key from `content` and the section is skipped,
  * with the remaining sections renumbered automatically.
@@ -64,8 +65,12 @@ const EditorialServicePage = ({ content, hero, breadcrumb }) => {
       <section
         className={`border-b border-[var(--im-line)] ${PAD} pb-12 pt-10 md:pb-16 md:pt-[72px]`}
       >
-        <div className={`${INNER} grid items-center gap-8 md:grid-cols-2 md:gap-16`}>
-          <div className="min-w-0">
+        <div
+          className={`${INNER} grid items-center gap-8 md:gap-16 ${
+            hero ? "md:grid-cols-2" : ""
+          }`}
+        >
+          <div className={hero ? "min-w-0" : "min-w-0 max-w-[900px]"}>
             <nav aria-label="Breadcrumb">
               <Mono className="flex flex-wrap items-center gap-1.5 text-[11px] uppercase tracking-[0.11em] text-[var(--im-dim)] md:text-xs md:tracking-[0.12em]">
                 <Link href="/services" className="transition-colors hover:text-[var(--im-ink)]">
@@ -126,14 +131,16 @@ const EditorialServicePage = ({ content, hero, breadcrumb }) => {
             ) : null}
           </div>
 
-          <motion.div
-            className="min-w-0"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {hero}
-          </motion.div>
+          {hero ? (
+            <motion.div
+              className="min-w-0"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {hero}
+            </motion.div>
+          ) : null}
         </div>
       </section>
 
