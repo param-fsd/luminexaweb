@@ -5,6 +5,23 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase";
+import PhoneField, {
+  DEFAULT_COUNTRY,
+  countryByIso,
+  toE164,
+  validatePhone,
+} from "@/components/forms/PhoneField";
+import {
+  FIELD,
+  FIELD_ERROR,
+  SELECT,
+  TEXTAREA,
+} from "@/components/forms/fieldStyles";
+import ConsentCheckbox, {
+  CONSENT_DOCS,
+  CONSENT_TEXT,
+  CONSENT_VERSION,
+} from "@/components/forms/ConsentCheckbox";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,9 +80,13 @@ const EnquiryForm = () => {
     designation: "",
     solutionType: "",
     budget: "",
+    /* Dial code and national number are tracked separately — see PhoneField. */
+    country: DEFAULT_COUNTRY,
     mobile: "",
     email: "",
     details: "",
+    /* Never pre-ticked — a pre-checked box is not consent. */
+    consent: false,
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -109,10 +130,12 @@ const EnquiryForm = () => {
       newErrors.email = "Enter a valid email";
     }
 
-    if (!formData.mobile.trim()) {
-      newErrors.mobile = "Mobile number is required";
-    } else if (!/^[0-9+\-\s()]{8,}$/.test(formData.mobile)) {
-      newErrors.mobile = "Enter a valid mobile number";
+    const phoneError = validatePhone(formData.country, formData.mobile);
+    if (phoneError) newErrors.mobile = phoneError;
+
+    if (!formData.consent) {
+      newErrors.consent =
+        "Please accept the Terms & Conditions and Privacy Policy to continue";
     }
 
     return newErrors;
@@ -151,10 +174,19 @@ const EnquiryForm = () => {
             contactName: formData.name.trim(),
             designation: formData.designation.trim(),
             emailId: formData.email.trim().toLowerCase(),
-            mobileNumber: formData.mobile.trim(),
+            mobileNumber: toE164(formData.country, formData.mobile),
+            mobileCountry: formData.country,
+            mobileDialCode: countryByIso(formData.country).dial,
+            mobileNationalNumber: formData.mobile.trim(),
             otherDetails: "",
           },
         ],
+        /* Auditable record of what was agreed to, and when. */
+        consentAccepted: true,
+        consentAcceptedAt: serverTimestamp(),
+        consentText: CONSENT_TEXT,
+        consentVersion: CONSENT_VERSION,
+        consentDocuments: CONSENT_DOCS,
         createdAt: serverTimestamp(),
         deleted: false,
         followUpDate: "",
@@ -174,9 +206,11 @@ const EnquiryForm = () => {
         designation: "",
         solutionType: "",
         budget: "",
+        country: DEFAULT_COUNTRY,
         mobile: "",
         email: "",
         details: "",
+        consent: false,
       });
 
       setErrors({});
@@ -194,19 +228,11 @@ const EnquiryForm = () => {
     }
   };
 
-  const inputClass =
-    "h-11 rounded-lg border border-border bg-background shadow-none transition focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/15";
-
-  const inputClassError =
-    "h-11 rounded-lg border border-destructive bg-background shadow-none transition focus-visible:border-destructive focus-visible:ring-2 focus-visible:ring-destructive/20";
-
-  const textareaClass =
-    "min-h-[110px] rounded-lg border border-border bg-background shadow-none transition focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/15";
-
-  const selectClass = cx(
-    "h-11 w-full rounded-lg border border-border bg-background px-3 text-sm shadow-none transition",
-    "focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15"
-  );
+  /* Field styling is shared across every form — see components/forms/fieldStyles. */
+  const inputClass = FIELD;
+  const inputClassError = FIELD_ERROR;
+  const textareaClass = cx(TEXTAREA, "min-h-[110px]");
+  const selectClass = SELECT;
 
   return (
     <section className="relative min-h-screen overflow-hidden py-4 sm:py-6 md:py-8">
@@ -397,7 +423,7 @@ const EnquiryForm = () => {
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="grid gap-x-4 gap-y-2.5 sm:grid-cols-2">
+                <form onSubmit={handleSubmit} className="grid gap-x-4 gap-y-4 sm:grid-cols-2">
                   <div className="space-y-1.5">
                     <label className="text-[13px] font-medium text-foreground">
                       Full Name <span className="text-destructive">*</span>
@@ -410,8 +436,8 @@ const EnquiryForm = () => {
                         onChange={handleChange}
                         placeholder="Your full name"
                         className={cx(
-                          "pl-9",
-                          errors.name ? inputClassError : inputClass
+                          errors.name ? inputClassError : inputClass,
+                          "pl-9"
                         )}
                       />
                     </div>
@@ -491,28 +517,6 @@ const EnquiryForm = () => {
 
                   <div className="space-y-1.5">
                     <label className="text-[13px] font-medium text-foreground">
-                      Mobile Number <span className="text-destructive">*</span>
-                    </label>
-                    <div className="relative">
-                      <Phone className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        name="mobile"
-                        value={formData.mobile}
-                        onChange={handleChange}
-                        placeholder="Mobile number"
-                        className={cx(
-                          "pl-9",
-                          errors.mobile ? inputClassError : inputClass
-                        )}
-                      />
-                    </div>
-                    {errors.mobile && (
-                      <p className="text-xs text-destructive">{errors.mobile}</p>
-                    )}
-                  </div>
-
-                  <div className="space-y-1.5 sm:col-span-2">
-                    <label className="text-[13px] font-medium text-foreground">
                       Email ID <span className="text-destructive">*</span>
                     </label>
                     <div className="relative">
@@ -524,14 +528,32 @@ const EnquiryForm = () => {
                         onChange={handleChange}
                         placeholder="you@company.com"
                         className={cx(
-                          "pl-9",
-                          errors.email ? inputClassError : inputClass
+                          errors.email ? inputClassError : inputClass,
+                          "pl-9"
                         )}
                       />
                     </div>
                     {errors.email && (
                       <p className="text-xs text-destructive">{errors.email}</p>
                     )}
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <PhoneField
+                      id="lead-mobile"
+                      country={formData.country}
+                      number={formData.mobile}
+                      onCountryChange={(country) => {
+                        setFormData((p) => ({ ...p, country }));
+                        setErrors((p) => ({ ...p, mobile: "" }));
+                      }}
+                      onNumberChange={(mobile) => {
+                        setFormData((p) => ({ ...p, mobile }));
+                        setErrors((p) => ({ ...p, mobile: "" }));
+                      }}
+                      error={errors.mobile}
+                      labelClass="text-[13px] font-medium text-foreground"
+                    />
                   </div>
 
                   <div className="space-y-1.5 sm:col-span-2">
@@ -547,10 +569,22 @@ const EnquiryForm = () => {
                     />
                   </div>
 
+                  <div className="sm:col-span-2">
+                    <ConsentCheckbox
+                      id="lead-consent"
+                      checked={formData.consent}
+                      onChange={(consent) => {
+                        setFormData((p) => ({ ...p, consent }));
+                        setErrors((p) => ({ ...p, consent: "" }));
+                      }}
+                      error={errors.consent}
+                    />
+                  </div>
+
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="h-12 rounded-xl text-sm font-medium sm:col-span-2"
+                    className="mt-1 h-12 rounded-md text-sm font-semibold sm:col-span-2"
                   >
                     <Send className="mr-2 size-4" />
                     {isSubmitting ? "Submitting..." : "Submit Enquiry"}

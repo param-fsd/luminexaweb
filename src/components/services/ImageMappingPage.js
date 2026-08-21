@@ -22,8 +22,8 @@ import { motion } from "framer-motion";
  * the site's secondary face, kept as-is) and Geist Mono for the label rails.
  */
 const FONTS = {
-  "--im-display": "var(--font-body), 'Space Grotesk', sans-serif",
-  "--im-body": "var(--font-display), 'Montserrat', sans-serif",
+  "--im-display": "var(--font-display), 'Montserrat', sans-serif",
+  "--im-body": "var(--font-body), 'Space Grotesk', sans-serif",
   "--im-mono": "var(--font-geist-mono), ui-monospace, monospace",
 };
 
@@ -63,9 +63,9 @@ const Mono = ({ children, className = "" }) => (
 const Section = ({ id, index, label, note, title, children, className = "" }) => (
   <section
     id={id}
-    className={`scroll-mt-24 border-b border-[var(--im-line)] px-5 py-12 sm:px-8 md:px-12 md:py-[88px] ${className}`}
+    className={`scroll-mt-24 border-b border-[var(--im-line)] px-4 py-12 md:px-8 md:py-[88px] ${className}`}
   >
-    <div className="mx-auto grid max-w-[1240px] gap-8 md:grid-cols-[200px_1fr] md:gap-14">
+    <div className="mx-auto grid max-w-[1216px] gap-8 md:grid-cols-[200px_1fr] md:gap-14">
       <div className="md:sticky md:top-24 md:self-start">
         <Mono className="text-[11px] uppercase tracking-[0.12em] text-[var(--im-deep)] md:text-xs">
           {index} / {label}
@@ -76,12 +76,12 @@ const Section = ({ id, index, label, note, title, children, className = "" }) =>
           </p>
         ) : null}
         {title ? (
-          <h2 className="mt-3.5 text-[28px] font-medium leading-[1.2] tracking-[-0.02em] text-[var(--im-ink)] md:hidden font-[family-name:var(--im-display)]">
+          <h2 className="mt-3.5 text-[28px] font-bold leading-[1.2] tracking-[-0.02em] text-[var(--im-ink)] md:hidden font-[family-name:var(--im-display)]">
             {title}
           </h2>
         ) : null}
       </div>
-      <div>{children}</div>
+      <div className="min-w-0">{children}</div>
     </div>
   </section>
 );
@@ -99,6 +99,29 @@ const Legend = ({ className = "" }) => (
         {s}
       </Mono>
     ))}
+  </div>
+);
+
+const PhaseSwitcher = ({ phases, phase, setPhase, className = "", buttonClassName = "" }) => (
+  <div className={className}>
+    {phases.map((ph) => {
+      const on = ph === phase;
+      return (
+        <button
+          key={ph}
+          type="button"
+          onClick={() => setPhase(ph)}
+          aria-pressed={on}
+          className={`rounded-[5px] px-2.5 py-1.5 transition-colors ${buttonClassName} ${
+            on
+              ? "bg-lumen text-lumen-foreground"
+              : "border border-[rgba(17,19,21,0.16)] bg-white/92 text-[var(--im-ink)] hover:bg-white"
+          }`}
+        >
+          <Mono className="text-[10px] sm:text-[11px]">{ph}</Mono>
+        </button>
+      );
+    })}
   </div>
 );
 
@@ -120,6 +143,15 @@ const PlotMap = ({ project, plots, ctaLink }) => {
         </Mono>
         <Legend className="hidden sm:flex" />
       </div>
+
+      {/* phase switcher — inline strip below lg, where an overlay would smother the map */}
+      <PhaseSwitcher
+        phases={project.phases}
+        phase={phase}
+        setPhase={setPhase}
+        className="grid grid-cols-3 gap-1.5 border-b border-[var(--im-line)] px-4 py-2.5 lg:hidden"
+        buttonClassName="text-center"
+      />
 
       {/* map */}
       <div className="relative h-[260px] sm:h-[360px] lg:h-[470px]">
@@ -169,26 +201,14 @@ const PlotMap = ({ project, plots, ctaLink }) => {
           })}
         </svg>
 
-        {/* phase switcher */}
-        <div className="absolute right-3 top-3 flex gap-1.5 lg:flex-col lg:gap-1.5">
-          {project.phases.map((ph) => {
-            const on = ph === phase;
-            return (
-              <button
-                key={ph}
-                type="button"
-                onClick={() => setPhase(ph)}
-                className={`rounded-[5px] px-2.5 py-1.5 text-left transition-colors ${
-                  on
-                    ? "bg-lumen text-lumen-foreground"
-                    : "border border-[rgba(17,19,21,0.16)] bg-white/92 text-[var(--im-ink)] hover:bg-white"
-                }`}
-              >
-                <Mono className="text-[10px] sm:text-[11px]">{ph}</Mono>
-              </button>
-            );
-          })}
-        </div>
+        {/* phase switcher — floats over the map from lg up */}
+        <PhaseSwitcher
+          phases={project.phases}
+          phase={phase}
+          setPhase={setPhase}
+          className="absolute right-3 top-3 hidden gap-1.5 lg:flex lg:flex-col"
+          buttonClassName="text-left"
+        />
 
         {/* detail card — floats over the map from lg up */}
         <div className="absolute bottom-4 left-4 hidden w-[268px] rounded-[10px] border border-[rgba(17,19,21,0.16)] bg-white/94 p-4 backdrop-blur-md lg:block">
@@ -266,7 +286,7 @@ const Faqs = ({ faqs }) => {
               aria-expanded={isOpen}
               className="flex w-full items-start justify-between gap-5 py-5 text-left"
             >
-              <span className="font-[family-name:var(--im-display)] text-base font-medium leading-[1.35] text-[var(--im-ink)] md:text-[19px]">
+              <span className="font-[family-name:var(--im-display)] text-base font-bold leading-[1.35] text-[var(--im-ink)] md:text-[19px]">
                 {faq.question}
               </span>
               <Mono className="shrink-0 text-base leading-tight text-[var(--im-deep)] md:text-lg">
@@ -319,9 +339,9 @@ const ImageMappingPage = ({ service, subService }) => {
       }}
     >
       {/* ── HERO ── */}
-      <section className="border-b border-[var(--im-line)] px-5 pb-12 pt-10 sm:px-8 md:px-12 md:pb-16 md:pt-[72px]">
-        <div className="mx-auto grid max-w-[1240px] items-center gap-8 md:grid-cols-2 md:gap-16">
-        <div>
+      <section className="border-b border-[var(--im-line)] px-4 pb-12 pt-10 md:px-8 md:pb-16 md:pt-[72px]">
+        <div className="mx-auto grid max-w-[1216px] items-center gap-8 md:grid-cols-2 md:gap-16">
+        <div className="min-w-0">
           <nav aria-label="Breadcrumb">
             <Mono className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.11em] text-[var(--im-dim)] md:text-xs md:tracking-[0.12em]">
               <Link href="/services" className="transition-colors hover:text-[var(--im-ink)]">
@@ -339,7 +359,7 @@ const ImageMappingPage = ({ service, subService }) => {
             </Mono>
           </nav>
 
-          <h1 className="mt-5 font-[family-name:var(--im-display)] text-[44px] font-medium leading-[1.0] tracking-[-0.03em] sm:text-[58px] md:mt-7 md:text-[68px] md:leading-[0.98] lg:text-[76px]">
+          <h1 className="mt-5 font-[family-name:var(--im-display)] text-[44px] font-bold leading-[1.0] tracking-[-0.03em] sm:text-[58px] md:mt-7 md:text-[68px] md:leading-[0.98] lg:text-[76px]">
             {(subService.headline || [subService.title]).map((line, i) => (
               <motion.span
                 key={line}
@@ -382,8 +402,9 @@ const ImageMappingPage = ({ service, subService }) => {
 
         {subService.plots?.length && subService.liveProject ? (
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className="min-w-0"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
             <PlotMap
@@ -398,8 +419,8 @@ const ImageMappingPage = ({ service, subService }) => {
 
       {/* ── STATS ── */}
       {subService.stats?.length ? (
-        <div className="border-b border-[var(--im-line)] px-5 sm:px-8 md:px-12">
-          <div className="mx-auto grid max-w-[1240px] grid-cols-3">
+        <div className="border-b border-[var(--im-line)] px-4 md:px-8">
+          <div className="mx-auto grid max-w-[1216px] grid-cols-3">
             {subService.stats.map((stat, i) => (
               <div
                 key={stat.label}
@@ -408,7 +429,7 @@ const ImageMappingPage = ({ service, subService }) => {
                 } ${i < subService.stats.length - 1 ? "pr-4 md:pr-12" : ""}`}
               >
                 <div
-                  className={`font-[family-name:var(--im-display)] text-[26px] font-medium leading-none tracking-[-0.02em] sm:text-[38px] md:text-[52px] ${
+                  className={`font-[family-name:var(--im-display)] text-[26px] font-bold leading-none tracking-[-0.02em] sm:text-[38px] md:text-[52px] ${
                     i === 0 ? "text-[var(--im-deep)]" : "text-[var(--im-ink)]"
                   }`}
                 >
@@ -434,7 +455,7 @@ const ImageMappingPage = ({ service, subService }) => {
         <Reveal>
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
             <div>
-              <h2 className="hidden font-[family-name:var(--im-display)] text-[34px] font-medium leading-[1.2] tracking-[-0.02em] md:block [text-wrap:pretty]">
+              <h2 className="hidden font-[family-name:var(--im-display)] text-[34px] font-bold leading-[1.2] tracking-[-0.02em] md:block [text-wrap:pretty]">
                 {subService.overviewTitle}
               </h2>
               <div
@@ -528,7 +549,7 @@ const ImageMappingPage = ({ service, subService }) => {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <h3 className="font-[family-name:var(--im-display)] text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
+                <h3 className="font-[family-name:var(--im-display)] text-[22px] font-bold tracking-[-0.01em] md:text-[26px]">
                   {demo.title}
                 </h3>
                 <p className="mt-3.5 text-[15px] leading-[1.7] text-[var(--im-muted)] md:text-base">
@@ -700,7 +721,7 @@ const ImageMappingPage = ({ service, subService }) => {
                 />
               </div>
               <div className="flex flex-col justify-center bg-[var(--im-panel)] p-7 md:p-10">
-                <div className="font-[family-name:var(--im-display)] text-[42px] font-medium tracking-[-0.02em] text-[var(--im-deep)] md:text-[56px]">
+                <div className="font-[family-name:var(--im-display)] text-[42px] font-bold tracking-[-0.02em] text-[var(--im-deep)] md:text-[56px]">
                   {study.result}
                 </div>
                 <h3 className="mt-3 font-[family-name:var(--im-display)] text-xl font-semibold text-[var(--im-ink)] md:mt-4 md:text-[22px]">
@@ -729,13 +750,13 @@ const ImageMappingPage = ({ service, subService }) => {
       ) : null}
 
       {/* ── CLOSING CTA ── */}
-      <section className="border-b border-[var(--im-line)] px-5 py-12 sm:px-8 md:px-12 md:py-[104px]">
-        <div className="mx-auto flex max-w-[1240px] flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
+      <section className="border-b border-[var(--im-line)] px-4 py-12 md:px-8 md:py-[104px]">
+        <div className="mx-auto flex max-w-[1216px] flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
           <div>
             <Mono className="text-[11px] uppercase tracking-[0.12em] text-[var(--im-deep)] md:text-xs">
               Ready to move forward
             </Mono>
-            <h2 className="mt-3.5 font-[family-name:var(--im-display)] text-[36px] font-medium leading-[1.05] tracking-[-0.03em] md:mt-5 md:text-[58px] md:leading-[1.02]">
+            <h2 className="mt-3.5 font-[family-name:var(--im-display)] text-[36px] font-bold leading-[1.05] tracking-[-0.03em] md:mt-5 md:text-[58px] md:leading-[1.02]">
               {cta.title}
             </h2>
             <p className="mt-3.5 text-base text-[var(--im-muted)] md:mt-4.5 md:text-lg">

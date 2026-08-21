@@ -100,7 +100,7 @@ const hotspots = [
 ];
 
 /* Space Grotesk — the doc's display face, already loaded by the root layout. */
-const DISPLAY = { fontFamily: "var(--font-body), 'Space Grotesk', sans-serif" };
+const DISPLAY = { fontFamily: "var(--font-display, 'Montserrat', sans-serif)" };
 
 /* -------------------------------------------------------------------------- */
 
@@ -117,27 +117,20 @@ const MainProduct = () => {
           className="flex flex-wrap items-end justify-between gap-8"
         >
           <motion.div variants={item} className="max-w-[680px]">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span
-                className="inline-flex h-[26px] items-center justify-center rounded-full bg-lumen px-3 text-[12px] font-bold text-lumen-foreground"
-                style={DISPLAY}
-              >
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-lumen px-1.5 text-[11px] font-bold tracking-wide text-lumen-foreground">
                 03
               </span>
-              <span
-                className="rounded-full bg-muted px-3.5 py-1.5 text-[12px] font-semibold text-foreground"
-                style={DISPLAY}
-              >
-                Visualization
-              </span>
-              <span className="rounded-full border border-border px-3.5 py-1.5 text-[12px] text-muted-foreground">
+              <span className="section-label">Visualization</span>
+              <span className="hidden h-px max-w-[120px] flex-1 bg-border sm:block" />
+              <span className="rounded-full border border-border px-3 py-1 text-[11px] text-muted-foreground">
                 Mapping · Tours · 3D
               </span>
             </div>
 
             <h2
-              className="mt-5 text-[30px] font-bold leading-[1.04] tracking-[-.02em] text-foreground sm:text-[38px] lg:text-[50px]"
-              style={DISPLAY}
+              className="mt-4 text-[26px] font-bold leading-[1.08] text-foreground sm:text-[32px] md:text-[38px]"
+              style={{ ...DISPLAY, letterSpacing: "-0.04em" }}
             >
               Transforming real estate with
               <br />

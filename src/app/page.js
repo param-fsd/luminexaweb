@@ -6,7 +6,7 @@ import WhatsNew from "@/components/WhatsNew";
 import LogoSection from "@/components/LogoSection";
 import FeatureSection from "@/components/FeatureSection";
 import WorkingSection from "@/components/WorkingSection";
-import Service from "@/app/services/page";
+import ServicesOverview from "@/components/services/ServicesOverview";
 import Blog from "@/app/blogs/page";
 import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
@@ -34,7 +34,7 @@ export default function LandingPage() {
       <MainProduct />
 
       {/* Services overview */}
-      <Service />
+      <ServicesOverview variant="preview" />
 
       {/* 04 · Capabilities */}
       <FeatureSection />

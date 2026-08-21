@@ -5,6 +5,23 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase";
+import PhoneField, {
+  DEFAULT_COUNTRY,
+  countryByIso,
+  toE164,
+  validatePhone,
+} from "@/components/forms/PhoneField";
+import {
+  FIELD,
+  FIELD_ERROR,
+  TEXTAREA,
+  TEXTAREA_ERROR,
+} from "@/components/forms/fieldStyles";
+import ConsentCheckbox, {
+  CONSENT_DOCS,
+  CONSENT_TEXT,
+  CONSENT_VERSION,
+} from "@/components/forms/ConsentCheckbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -104,7 +121,12 @@ const ContactPage = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    /* Dial code and national number are tracked separately — see PhoneField. */
+    country: DEFAULT_COUNTRY,
+    mobile: "",
     message: "",
+    /* Never pre-ticked — a pre-checked box is not consent. */
+    consent: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -128,7 +150,15 @@ const ContactPage = () => {
       newErrors.email = "Enter a valid email";
     }
 
+    const phoneError = validatePhone(form.country, form.mobile);
+    if (phoneError) newErrors.mobile = phoneError;
+
     if (!form.message.trim()) newErrors.message = "Message is required";
+
+    if (!form.consent) {
+      newErrors.consent =
+        "Please accept the Terms & Conditions and Privacy Policy to continue";
+    }
 
     return newErrors;
   };
@@ -148,7 +178,18 @@ const ContactPage = () => {
       await addDoc(collection(db, "contactUs"), {
         name: form.name.trim(),
         email: form.email.trim(),
+        /* Full dialable number, plus the parts so the code can be filtered on. */
+        phone: toE164(form.country, form.mobile),
+        phoneCountry: form.country,
+        phoneDialCode: countryByIso(form.country).dial,
+        phoneNumber: form.mobile.trim(),
         message: form.message.trim(),
+        /* Auditable record of what was agreed to, and when. */
+        consentAccepted: true,
+        consentAcceptedAt: serverTimestamp(),
+        consentText: CONSENT_TEXT,
+        consentVersion: CONSENT_VERSION,
+        consentDocuments: CONSENT_DOCS,
         status: "new",
         source: "website contact page",
         createdAt: serverTimestamp(),
@@ -159,7 +200,10 @@ const ContactPage = () => {
       setForm({
         name: "",
         email: "",
+        country: DEFAULT_COUNTRY,
+        mobile: "",
         message: "",
+        consent: false,
       });
       setErrors({});
 
@@ -174,21 +218,11 @@ const ContactPage = () => {
     }
   };
 
-  const inputClass =
-    "h-11 rounded-xl border border-border/70 bg-background/70 shadow-sm transition " +
-    "focus-visible:ring-2 focus-visible:ring-lumen/40 focus-visible:border-lumen/50 focus-visible:ring-offset-0";
-
-  const inputClassError =
-    "h-11 rounded-xl border border-destructive/60 bg-background/70 shadow-sm transition " +
-    "focus-visible:ring-2 focus-visible:ring-destructive/30 focus-visible:ring-offset-0";
-
-  const textareaClass =
-    "min-h-[150px] rounded-xl border border-border/70 bg-background/70 shadow-sm transition " +
-    "focus-visible:ring-2 focus-visible:ring-lumen/40 focus-visible:border-lumen/50 focus-visible:ring-offset-0";
-
-  const textareaClassError =
-    "min-h-[150px] rounded-xl border border-destructive/60 bg-background/70 shadow-sm transition " +
-    "focus-visible:ring-2 focus-visible:ring-destructive/30 focus-visible:ring-offset-0";
+  /* Field styling is shared across every form — see components/forms/fieldStyles. */
+  const inputClass = FIELD;
+  const inputClassError = FIELD_ERROR;
+  const textareaClass = TEXTAREA;
+  const textareaClassError = TEXTAREA_ERROR;
 
   const contactInfo = [
     {
@@ -475,6 +509,23 @@ const ContactPage = () => {
                     )}
                   </div>
 
+                  <div className="md:col-span-2">
+                    <PhoneField
+                      id="contact-mobile"
+                      country={form.country}
+                      number={form.mobile}
+                      onCountryChange={(country) => {
+                        setForm((p) => ({ ...p, country }));
+                        setErrors((p) => ({ ...p, mobile: "" }));
+                      }}
+                      onNumberChange={(mobile) => {
+                        setForm((p) => ({ ...p, mobile }));
+                        setErrors((p) => ({ ...p, mobile: "" }));
+                      }}
+                      error={errors.mobile}
+                    />
+                  </div>
+
                   <div className="space-y-1.5 md:col-span-2">
                     <label className="text-sm font-medium text-foreground">
                       Your Message <span className="text-destructive">*</span>
@@ -496,6 +547,18 @@ const ContactPage = () => {
                     <p className="text-[11px] leading-5 text-muted-foreground">
                       Mention your requirement briefly.
                     </p>
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <ConsentCheckbox
+                      id="contact-consent"
+                      checked={form.consent}
+                      onChange={(consent) => {
+                        setForm((p) => ({ ...p, consent }));
+                        setErrors((p) => ({ ...p, consent: "" }));
+                      }}
+                      error={errors.consent}
+                    />
                   </div>
 
                   <Button

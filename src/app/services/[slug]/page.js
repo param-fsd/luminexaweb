@@ -19,6 +19,11 @@ import {
 } from "lucide-react";
 import services from "@/data/serviceData";
 import VirtualTourPage from "@/components/services/VirtualTourPage";
+import CrmErpPage from "@/components/services/CrmErpPage";
+import WebDevelopmentPage from "@/components/services/WebDevelopmentPage";
+import CustomWebAppPage from "@/components/services/CustomWebAppPage";
+import AiAutomationPage from "@/components/services/AiAutomationPage";
+import ThreeDVisualizationPage from "@/components/services/ThreeDVisualizationPage";
 
 /* -------------------------------------------------------------------------- */
 /* Background                                                                  */
@@ -167,11 +172,27 @@ const SubServiceTile = ({ parentSlug, serviceImage, subService }) => {
   );
 };
 
+/* Services with a hand-built page; everything else falls through to the template below. */
+const BESPOKE_PAGES = {
+  "360-virtual-tour": VirtualTourPage,
+  "crm-erp": CrmErpPage,
+  "website-app-development": WebDevelopmentPage,
+  "custom-web-application": CustomWebAppPage,
+  "artificial-intelligence": AiAutomationPage,
+  "3d-visualization": ThreeDVisualizationPage,
+};
+
 const ServiceDetails = () => {
   const params = useParams();
   const slug = params?.slug;
 
   const service = useMemo(() => services.find((s) => s.slug === slug), [slug]);
+
+  /* A service whose data module is still empty exports no array — never let that throw. */
+  const subServices = useMemo(
+    () => (Array.isArray(service?.subServices) ? service.subServices : []),
+    [service],
+  );
 
   if (!service) {
     return (
@@ -181,8 +202,10 @@ const ServiceDetails = () => {
     );
   }
 
-  if (slug === "360-virtual-tour") {
-    return <VirtualTourPage service={service} />;
+  /* services with a bespoke layout opt out of the generic template */
+  const Bespoke = BESPOKE_PAGES[slug];
+  if (Bespoke) {
+    return <Bespoke service={service} />;
   }
 
   const heroImage = service.image || "/placeholder.jpg";
@@ -340,7 +363,7 @@ const ServiceDetails = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-            {service?.subServices?.map((sub) => (
+            {subServices.map((sub) => (
               <SubServiceTile
                 key={sub.subSlug}
                 parentSlug={service.slug}

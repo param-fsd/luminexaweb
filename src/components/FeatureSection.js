@@ -36,7 +36,7 @@ const FeatureSection = () => {
         {/* Removed all colored glow blobs */}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <SectionHeader
           index="04"
           label="Capabilities"

@@ -148,7 +148,10 @@ const SubServiceDetails = () => {
   const service = useMemo(() => services.find((s) => s.slug === slug), [slug]);
 
   const subService = useMemo(
-    () => service?.subServices?.find((ss) => ss.subSlug === subSlug),
+    () =>
+      (Array.isArray(service?.subServices) ? service.subServices : []).find(
+        (ss) => ss.subSlug === subSlug,
+      ),
     [service, subSlug]
   );
 

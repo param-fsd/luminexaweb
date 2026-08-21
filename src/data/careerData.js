@@ -2,7 +2,10 @@ import { Rocket, Lightbulb, Users, Briefcase } from "lucide-react";
 
 /**
  * Job structure:
- *  slug, title, shortDescription, location, type, experience
+ *  slug, active, title, shortDescription, location, type, experience
+ *
+ * `active: false` keeps a role's content around but hides it from the careers
+ * listing and shows a closed state on its detail page. Use `activeJobs` to list.
  *  apply: { email, url? }
  *  sections: [{ heading, body?: string[], items?: (string | { label, text })[] }]
  *
@@ -12,6 +15,7 @@ import { Rocket, Lightbulb, Users, Briefcase } from "lucide-react";
 const jobs = [
   {
     slug: "full-stack-developer-mern",
+    active: false,
     title: "Full Stack Developer",
     shortDescription:
       "Luminexa is looking for a talented Full Stack Developer to build next-gen, custom web applications with AI and 3D experiences.",
@@ -82,6 +86,7 @@ const jobs = [
   },
   {
     slug: "android-ios-developer",
+    active: false,
     title: "Android & iOS Developer",
     shortDescription:
       "Luminexa is seeking a skilled Android & iOS Developer to create next-generation mobile applications merging design, functionality, AI, and AR.",
@@ -148,6 +153,7 @@ const jobs = [
   },
   {
     slug: "architecture-visualizer",
+    active: true,
     title: "Architecture Visualizer",
     shortDescription:
       "Luminexa is expanding its creative team and looking for a highly skilled Architecture Visualizer who can bring architectural concepts to life through immersive 3D renders and animated walkthroughs.",
@@ -215,6 +221,7 @@ const jobs = [
   },
   {
     slug: "junior-architect",
+    active: false,
     title: "Junior Architect",
     shortDescription:
       "Luminexa is looking for a passionate Junior Architect to support architecture and 3D teams in creating compelling designs, realistic models, and immersive visual narratives.",
@@ -276,6 +283,7 @@ const jobs = [
   },
   {
     slug: "business-development-associate",
+    active: true,
     title: "Business Development Associate",
     shortDescription:
       "Luminexa is looking for a dynamic Business Development Associate (BDA) who will be a key player in driving our growth.",
@@ -366,4 +374,7 @@ const benefits = [
   },
 ];
 
-export { jobs, benefits };
+/* Roles currently open — what the careers listing renders. */
+const activeJobs = jobs.filter((job) => job.active);
+
+export { jobs, activeJobs, benefits };

@@ -1,168 +1,124 @@
-// Portfolio data for Python Developer
-export const portfolioData = {
-  name: "Alex Chen",
-  title: "Python Software Developer",
-  tagline: "Building scalable solutions with Python",
-  about: {
-    description: `I'm a passionate Python developer with over 5 years of experience building web applications, APIs, and automation solutions. I specialize in Django, FastAPI, and cloud technologies, helping businesses transform their ideas into robust software solutions.`,
-    avatar: "/profile.jpg",
-    location: "San Francisco, CA",
-    email: "alex.chen@example.com",
-    github: "https://github.com/alexchen",
-    linkedin: "https://linkedin.com/in/alexchen",
-    resume: "/resume.pdf"
+/**
+ * Portfolio entries.
+ *
+ * This file replaced an unrelated boilerplate file (a fictional "Alex Chen, Python
+ * Developer") that nothing imported.
+ *
+ * /portfolio is still a "coming soon" page by choice, and renders only the
+ * `type: "demo"` entries below. Client entries are kept here ready for when the
+ * real portfolio launches — they are not shown anywhere yet.
+ *
+ * ─── HOW TO ADD A REAL PROJECT ───────────────────────────────────────────────
+ * Copy the template at the bottom into `projects`, fill it in, and drop the image
+ * into /public. To launch the full portfolio, render a grid over `projects` in
+ * src/app/portfolio/page.js instead of the demos-only section.
+ *
+ * Entry shape:
+ *   id          unique string, used as the React key
+ *   type        "client" (real delivered work) or "demo" (something live on this site)
+ *   title       what it is
+ *   client      client or project name — omit for demos, or use "Under NDA"
+ *   sector      e.g. "Real Estate", "Manufacturing"
+ *   year        "2025"
+ *   summary     one or two sentences on what was built and why
+ *   services    string[] — matches the service names used elsewhere on the site
+ *   image       path under /public
+ *   href        where the card links (a live URL, a case study, or a service page)
+ *   linkLabel   optional button text; defaults to "View project"
+ *
+ * Only claim results a client has approved in writing. Everything below is either
+ * verifiable on this site or drawn from the published case study.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+const projects = [
+  /* ── Live demos: each of these is a working build on this site ── */
+  {
+    id: "demo-image-mapping",
+    type: "demo",
+    title: "Interactive plot map",
+    sector: "Real Estate",
+    summary:
+      "A master layout turned into a live sales tool — clickable plots with status, pricing, area and facing, and a phase switcher across the development.",
+    services: ["Image Mapping", "Plot Inventory", "Interactive Master Plan"],
+    image: "/map3d.jpg",
+    href: "/services/mapping/image-mapping",
+    linkLabel: "Open the demo",
   },
-  skills: {
-    languages: [
-      { name: "Python", level: 95, icon: "🐍" },
-      { name: "JavaScript", level: 80, icon: "📜" },
-      { name: "TypeScript", level: 75, icon: "📘" },
-      { name: "SQL", level: 85, icon: "🗃️" }
-    ],
-    frameworks: [
-      { name: "Django", level: 90, icon: "🎯" },
-      { name: "FastAPI", level: 88, icon: "⚡" },
-      { name: "Flask", level: 82, icon: "🌶️" },
-      { name: "React", level: 75, icon: "⚛️" }
-    ],
-    databases: [
-      { name: "PostgreSQL", level: 85, icon: "🐘" },
-      { name: "MongoDB", level: 80, icon: "🍃" },
-      { name: "Redis", level: 75, icon: "🔴" },
-      { name: "MySQL", level: 78, icon: "🟦" }
-    ],
-    devops: [
-      { name: "Docker", level: 82, icon: "🐳" },
-      { name: "AWS", level: 78, icon: "☁️" },
-      { name: "Git", level: 90, icon: "📝" },
-      { name: "CI/CD", level: 75, icon: "🔄" }
-    ]
+  {
+    id: "demo-digital-twin",
+    type: "demo",
+    title: "Real estate digital twin",
+    sector: "Real Estate",
+    summary:
+      "A building model that stays bound to live data — unit availability from CRM, plus occupancy, energy and open tickets pinned to the spaces they belong to.",
+    services: ["Digital Twin", "3D Visualization", "CRM Integration"],
+    image: "/3d.jpg",
+    href: "/services/3d-visualization/digital-twin",
+    linkLabel: "Open the demo",
   },
-  projects: [
-    {
-      id: 1,
-      title: "E-Commerce API",
-      description: "Scalable REST API for e-commerce platform with microservices architecture",
-      tech: ["Python", "FastAPI", "PostgreSQL", "Docker", "AWS"],
-      github: "https://github.com/alexchen/ecommerce-api",
-      demo: "https://ecommerce-api.demo.com",
-      image: "/project1.jpg",
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Task Management System",
-      description: "Full-stack project management tool with real-time collaboration",
-      tech: ["Django", "React", "WebSocket", "Redis"],
-      github: "https://github.com/alexchen/task-manager",
-      demo: "https://taskmanager.demo.com",
-      image: "/project2.jpg",
-      featured: true
-    },
-    {
-      id: 3,
-      title: "Data Pipeline Automator",
-      description: "Automated data pipeline for ETL processes with monitoring",
-      tech: ["Python", "Airflow", "Spark", "AWS Glue"],
-      github: "https://github.com/alexchen/data-pipeline",
-      demo: null,
-      image: "/project3.jpg",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "ML Model Deployment",
-      description: "ML model serving platform with FastAPI and Kubernetes",
-      tech: ["Python", "FastAPI", "TensorFlow", "Kubernetes"],
-      github: "https://github.com/alexchen/ml-deployment",
-      demo: "https://ml-serving.demo.com",
-      image: "/project4.jpg",
-      featured: true
-    },
-    {
-      id: 5,
-      title: "Chat Application",
-      description: "Real-time chat app with end-to-end encryption",
-      tech: ["Python", "Django Channels", "WebSocket", "PostgreSQL"],
-      github: "https://github.com/alexchen/chat-app",
-      demo: "https://chatapp.demo.com",
-      image: "/project5.jpg",
-      featured: false
-    },
-    {
-      id: 6,
-      title: "Portfolio CMS",
-      description: "Headless CMS for content management with GraphQL",
-      tech: ["Python", "Django Graphene", "PostgreSQL", "Vue.js"],
-      github: "https://github.com/alexchen/cms",
-      demo: "https://cms.demo.com",
-      image: "/project6.jpg",
-      featured: false
-    }
-  ],
-  experience: [
-    {
-      id: 1,
-      company: "TechCorp Inc.",
-      role: "Senior Python Developer",
-      period: "2022 - Present",
-      description: "Leading the development of core backend services using Django and FastAPI. Architected microservices for high-traffic applications serving 10M+ users.",
-      technologies: ["Django", "FastAPI", "PostgreSQL", "Docker", "AWS"]
-    },
-    {
-      id: 2,
-      company: "StartupXYZ",
-      role: "Full Stack Developer",
-      period: "2020 - 2022",
-      description: "Built and maintained multiple web applications using Python and React. Implemented CI/CD pipelines and improved deployment efficiency by 40%.",
-      technologies: ["Python", "Django", "React", "AWS", "Docker"]
-    },
-    {
-      id: 3,
-      company: "DataFlow Systems",
-      role: "Backend Developer",
-      period: "2018 - 2020",
-      description: "Developed data processing pipelines and APIs for analytics platform. Optimized database queries reducing load time by 60%.",
-      technologies: ["Python", "Flask", "MongoDB", "Redis"]
-    }
-  ],
-  education: [
-    {
-      id: 1,
-      institution: "Stanford University",
-      degree: "M.S. Computer Science",
-      period: "2016 - 2018",
-      focus: "Machine Learning & Distributed Systems"
-    },
-    {
-      id: 2,
-      institution: "UC Berkeley",
-      degree: "B.S. Computer Science",
-      period: "2012 - 2016",
-      focus: "Software Engineering"
-    }
-  ],
-  testimonials: [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      role: "CTO at TechCorp",
-      content: "Alex is an exceptional developer who consistently delivers high-quality code. His expertise in Python and system design has been invaluable to our team.",
-      avatar: "/testimonial1.jpg"
-    },
-    {
-      id: 2,
-      name: "Michael Lee",
-      role: "Engineering Manager at StartupXYZ",
-      content: "Working with Alex was a pleasure. He brings deep technical knowledge and great communication skills to every project he touches.",
-      avatar: "/testimonial2.jpg"
-    }
-  ],
-  contact: {
-    email: "alex.chen@example.com",
-    github: "https://github.com/alexchen",
-    linkedin: "https://linkedin.com/in/alexchen",
-    twitter: "https://twitter.com/alexchen",
-    calendly: "https://calendly.com/alexchen"
-  }
-};
+  {
+    id: "demo-crm-erp",
+    type: "demo",
+    title: "CRM & ERP console",
+    sector: "Business Systems",
+    summary:
+      "Sales pipeline, inventory and finance in one interface, with KPI tiles and stage-by-stage drill-down across each module.",
+    services: ["CRM Development", "ERP Development", "Dashboards"],
+    image: "/crm.jpg",
+    href: "/services/crm-erp",
+    linkLabel: "Open the demo",
+  },
+  {
+    id: "demo-ai-automation",
+    type: "demo",
+    title: "AI automation runs",
+    sector: "Operations",
+    summary:
+      "Support, sales and back-office workflows stepped through end to end, including the confidence threshold that hands work back to a person.",
+    services: ["AI Agents", "Workflow Automation"],
+    image: "/nexai.jpg",
+    href: "/services/artificial-intelligence",
+    linkLabel: "Open the demo",
+  },
+
+  /* ── Delivered work ── */
+  {
+    id: "case-real-estate-visualization",
+    type: "client",
+    title: "Visualisation for a plotted development",
+    client: "Real estate developer",
+    sector: "Real Estate",
+    year: "2025",
+    summary:
+      "Image mapping, 360° virtual tours and drone visualisation combined into one presentation, so buyers could understand layout, access and surroundings without a site visit.",
+    services: [
+      "Image Mapping",
+      "360 Virtual Tour",
+      "Drone Visualization",
+      "Interactive Project Presentation",
+    ],
+    image: "/blog4.jpg",
+    href: "/case-studies/lack-of-visualization-in-real-estate",
+    linkLabel: "Read the case study",
+  },
+
+  /* ── TEMPLATE — copy, fill in, and remove the comment markers ──
+  {
+    id: "unique-id-here",
+    type: "client",
+    title: "What you built",
+    client: "Client name, or \"Under NDA\"",
+    sector: "Real Estate",
+    year: "2026",
+    summary: "One or two sentences: the problem, and what you delivered.",
+    services: ["Image Mapping", "CRM Development"],
+    image: "/your-image.jpg",
+    href: "/contact-us",
+    linkLabel: "View project",
+  },
+  ──────────────────────────────────────────────────────────────── */
+];
+
+export default projects;
+export { projects };

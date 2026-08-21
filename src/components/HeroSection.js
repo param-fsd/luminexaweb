@@ -84,8 +84,10 @@ const HeroSection = () => {
         <div className="absolute -bottom-32 -right-32 h-[540px] w-[540px] rounded-full bg-lumen/20 blur-3xl" />
       </div>
 
-      <div className="px-4 md:px-8 pt-14 pb-10 md:pt-20 md:pb-14">
-        <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="pt-14 pb-10 md:pt-20 md:pb-14">
+        {/* Padding lives on the max-width box, as it does in every other section —
+            otherwise the hero's content starts 32px inboard of the rest. */}
+        <div className="mx-auto max-w-7xl px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col items-start text-left min-w-0 w-full">

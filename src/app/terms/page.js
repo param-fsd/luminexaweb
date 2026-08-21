@@ -64,6 +64,33 @@ const TermsAndConditions = () => {
         ],
       },
       {
+        id: "enquiry-data",
+        title: "Enquiries & Personal Data You Submit",
+        icon: UserCheck,
+        content: [
+          "Our Contact and Get Started forms ask for details such as your name, email address and mobile number with its country code, along with optional company and project information. You must tick the consent box before the form can be submitted.",
+          "By submitting a form you confirm that the details are accurate, that you are at least 18 years old, and that you are entitled to share them. If you provide someone else’s details, you confirm you have their permission to do so.",
+          "You consent to us contacting you about the enquiry you raised, by email, phone, or messaging, using the details you provided. You can ask us to stop at any time.",
+          "We record the wording of the consent you accepted, its version, and the time of acceptance, so that both parties have a clear record of what was agreed.",
+          "Do not submit passwords, financial account details, government identification numbers, health information, or other sensitive personal data through our forms. Where a project requires such data, we will agree a secure channel with you separately.",
+          "Submitting an enquiry does not by itself create a contract or oblige either party to proceed. Any engagement begins only under an agreed proposal or signed Service Agreement.",
+          "How we store, use, retain and protect the information you submit is described in our Privacy Policy, which forms part of these terms.",
+        ],
+      },
+      {
+        id: "data-protection",
+        title: "Data Protection & Security Commitments",
+        icon: Lock,
+        content: [
+          "We handle personal data collected through this website in line with our Privacy Policy and applicable data protection law, including India’s Digital Personal Data Protection Act, 2023 where it applies to you.",
+          "Enquiry and client data is held in access-controlled systems, transmitted over encrypted connections, and made available only to team members who need it for the purpose you provided it.",
+          "We do not sell personal data, and we do not share it with third parties for their own marketing.",
+          "Where we use service providers to operate our systems, we choose providers that offer appropriate security safeguards and permit them to use your data only for the services they provide to us.",
+          "You may request access to, correction of, or deletion of the enquiry details we hold about you, and you may withdraw consent for future contact, as described in the Privacy Policy.",
+          "No system can be guaranteed completely secure. If a breach occurs that is likely to affect your rights, we will act to contain it and notify affected individuals and the relevant authority as required by law.",
+        ],
+      },
+      {
         id: "hosting-deployment",
         title: "Hosting & Deployment",
         icon: Server,

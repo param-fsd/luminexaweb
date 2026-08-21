@@ -50,6 +50,18 @@ const PrivacyPolicy = () => {
         ],
       },
       {
+        id: "enquiry-lead-data",
+        title: "Enquiry & Lead Data",
+        icon: UserCheck,
+        content: [
+          "When you submit our Contact or Get Started form, we collect the details you enter — typically your name, email address, mobile number including its country dialling code, and, where offered, your company name, designation, budget range, solution type and project description.",
+          "We collect this information only after you tick the consent box confirming that you accept these terms. We record the wording you agreed to, the version of this policy in force, and the date and time of acceptance, so that both you and we have a clear record.",
+          "This information is used to respond to your enquiry, prepare proposals or estimates, arrange demonstrations, and follow up about the project you described. We do not use enquiry data for unrelated marketing without asking you separately.",
+          "Submitting an enquiry does not create an obligation on either side. You may ask us to stop contacting you at any time, and we will act on that request.",
+          "Please do not include passwords, financial account details, government identification numbers, health information, or other sensitive personal data in a form. If a project genuinely requires such data, we will agree a secure method separately.",
+        ],
+      },
+      {
         id: "how-we-use",
         title: "How We Use Your Information",
         icon: Sparkles,
@@ -97,7 +109,23 @@ const PrivacyPolicy = () => {
         icon: Lock,
         content: [
           "We apply reasonable administrative, technical, and organizational safeguards designed to protect your information.",
-          "However, no online method of transmission or storage is 100% secure. We encourage you to avoid sharing highly sensitive personal information in forms unless necessary.",
+          "Our website is served over HTTPS, so information you type into a form is encrypted in transit between your browser and our systems.",
+          "Enquiry and lead records are held in access-controlled cloud infrastructure. Access is limited to the team members who need it to respond to you or to administer the system, and administrative accounts are individually identified rather than shared.",
+          "We review who holds access as the team changes, and remove access when it is no longer needed.",
+          "However, no method of transmission or storage over the internet is completely secure. We encourage you to avoid sharing highly sensitive personal information in forms unless it is genuinely necessary.",
+          "If a breach occurs that is likely to affect your rights, we will act to contain it and notify affected individuals and the relevant authority as required by applicable law.",
+        ],
+      },
+      {
+        id: "your-choices",
+        title: "Consent, Access & Deletion",
+        icon: ShieldCheck,
+        content: [
+          "Consent for enquiry data is given knowingly through the tick box on our forms. It is never pre-selected, and you can decline simply by not submitting the form.",
+          "You may withdraw consent at any time by writing to us. Withdrawal applies going forward and does not affect processing already carried out lawfully.",
+          "You may ask us for a copy of the enquiry details we hold about you, ask us to correct anything inaccurate, or ask us to delete the record. We will respond within a reasonable period.",
+          "We may retain a minimal record where we are required to do so by law, or to establish or defend a legal claim — for example, the fact and date of your consent.",
+          "To make any of these requests, contact us using the details on our Contact page and tell us which enquiry the request relates to.",
         ],
       },
       {

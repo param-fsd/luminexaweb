@@ -33,7 +33,7 @@ const CTASection = () => {
       <div className="absolute inset-0 -z-10 bg-background" />
       <div className="absolute inset-0 -z-10 opacity-[0.04] line-grid" />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

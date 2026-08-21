@@ -162,32 +162,25 @@ const WhatsNew = () => {
         <div className="absolute bottom-10 right-1/4 h-[320px] w-[320px] rounded-full bg-lumen/10 blur-3xl" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
-        {/* centered intro */}
-        <div className="flex flex-col items-center text-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        {/* intro — left aligned, matching every other section on the page */}
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
           <SectionHeader
             index="01"
             label="What's New"
             title="Fresh out of the studio."
             description="Two new capabilities just landed — built to make property and product experiences feel alive."
-            align="center"
+            className="max-w-3xl"
           />
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25, duration: 0.5 }}
-            className="mt-6"
+
+          <Link
+            href="/blogs"
+            className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-border bg-background px-4 py-2 text-[12px] font-semibold text-foreground transition-all duration-200 hover:bg-foreground hover:text-background md:self-auto"
           >
-            <Link
-              href="/blogs"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-[12px] font-semibold text-foreground hover:bg-foreground hover:text-background transition-all duration-200"
-            >
-              <Sparkles className="size-3.5 text-lumen-foreground fill-lumen" />
-              See all updates
-              <ArrowUpRight className="size-3.5" />
-            </Link>
-          </motion.div>
+            <Sparkles className="size-3.5 fill-lumen text-lumen-foreground" />
+            See all updates
+            <ArrowUpRight className="size-3.5" />
+          </Link>
         </div>
 
         {/* alternating editorial rows */}

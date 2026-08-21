@@ -1,3 +1,10 @@
+/**
+ * Case studies.
+ *
+ * `seo` feeds generateMetadata in src/app/case-studies/[slug]/page.js.
+ * `metrics` drives the stat strip on the listing and detail pages — keep the values
+ * qualitative unless a client has approved a hard number.
+ */
 const caseStudies = [
   {
     slug: "lack-of-visualization-in-real-estate",
@@ -8,6 +15,27 @@ const caseStudies = [
     client: "Real Estate Client",
      coverImage: "/blog4.jpg",
     location: "Bangalore",
+    readingTime: "6 min read",
+
+    seo: {
+      title: "Lack of Visualization in Real Estate | Luminexa Case Study",
+      description:
+        "How image mapping, 360° virtual tours and drone visualisation closed the communication gap between a real estate developer and its buyers.",
+      keywords: [
+        "real estate visualization",
+        "image mapping case study",
+        "360 virtual tour real estate",
+        "drone visualization",
+        "interactive project presentation",
+      ],
+    },
+
+    /* Qualitative on purpose — no client-approved figures to quote yet. */
+    metrics: [
+      { value: "4", label: "Visualisation tools combined" },
+      { value: "Remote", label: "Project exploration enabled" },
+      { value: "Fewer", label: "Site visits needed to decide" },
+    ],
     shortDescription:
       "Many real estate projects struggle to communicate layout, space, surroundings, and project value clearly. This case study explains how visualization tools solve that gap.",
 

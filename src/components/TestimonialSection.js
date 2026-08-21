@@ -89,7 +89,7 @@ const TestimonialSection = () => {
       <div className="absolute inset-0 -z-10 bg-background" />
       <div className="absolute inset-0 -z-10 opacity-[0.04] dot-grid" />
 
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <SectionHeader
           index="06"
           label="Testimonials"

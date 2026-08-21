@@ -19,7 +19,7 @@ const LogoSection = () => {
   return (
     <section className="w-full border-b border-border/60">
       {/* ── Section label ── */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ const LogoSection = () => {
       </div>
 
       {/* ── Stats grid ── */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 pb-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-10">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border border-t border-border">
           {highlights.map((item, i) => {
             const Icon = item.icon;
