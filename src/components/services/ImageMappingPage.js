@@ -536,27 +536,34 @@ const ImageMappingPage = ({ service, subService }) => {
       {demo ? (
         <Section id="demo" index="03" label="Demo" note="See it in motion." title="See it in motion.">
           <Reveal>
-            <div className="grid items-stretch gap-6 lg:grid-cols-[1.6fr_1fr] lg:gap-8">
-              <div className="overflow-hidden rounded-xl border border-[var(--im-line-strong)] bg-[#EFEFEC]">
+            <div className="flex flex-col gap-6 md:gap-8">
+              <div className="w-full min-w-0 overflow-hidden rounded-xl border border-[var(--im-line-strong)] bg-[#EFEFEC]">
                 <video
                   src={demo.url}
                   poster={demo.poster}
-                  controls
+                  autoPlay
+                  muted
+                  loop
                   playsInline
+                  controls={false}
+                  disablePictureInPicture
+                  controlsList="nodownload noplaybackrate noremoteplayback"
                   preload="metadata"
-                  className="aspect-video h-full w-full object-cover"
+                  className="aspect-video h-auto w-full object-cover [&::-webkit-media-controls]:hidden"
                   aria-label={demo.title}
                 />
               </div>
-              <div className="flex flex-col justify-center">
-                <h3 className="font-[family-name:var(--im-display)] text-[22px] font-bold tracking-[-0.01em] md:text-[26px]">
-                  {demo.title}
-                </h3>
-                <p className="mt-3.5 text-[15px] leading-[1.7] text-[var(--im-muted)] md:text-base">
-                  {demo.description}
-                </p>
+              <div className="grid min-w-0 gap-4 md:grid-cols-[1fr_auto] md:items-end md:gap-12">
+                <div className="min-w-0">
+                  <h3 className="font-[family-name:var(--im-display)] text-[22px] font-bold tracking-[-0.01em] md:text-[26px]">
+                    {demo.title}
+                  </h3>
+                  <p className="mt-3.5 max-w-[720px] text-[15px] leading-[1.7] text-[var(--im-muted)] md:text-base">
+                    {demo.description}
+                  </p>
+                </div>
                 {demo.notes?.length ? (
-                  <div className="mt-6 flex gap-6">
+                  <div className="flex gap-6 md:shrink-0">
                     {demo.notes.map((note) => (
                       <Mono key={note} className="text-xs text-[var(--im-dim)]">
                         {note}
