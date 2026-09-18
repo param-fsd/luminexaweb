@@ -159,7 +159,7 @@ const MainProduct = () => {
           <div className="relative overflow-hidden rounded-[22px] border border-border shadow-lg shadow-black/5">
             <div className="aspect-[16/8]">
               <video
-                src="/vid1.mp4"
+                src="/img.mp4"
                 className="size-full object-cover"
                 autoPlay
                 muted

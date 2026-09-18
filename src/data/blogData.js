@@ -2,6 +2,71 @@
 
 const blogs = [
   {
+    slug: "immersive-3d-real-estate-web-app",
+    title: "Jewel of Coorg: An Immersive 3D Property Experience",
+    shortDescription:
+      "Explore Jewel of Coorg through immersive aerial views, individual villas, floor plans and 360° tours that bring the development into focus.",
+    image: "/immersive-3d-aerial.webp",
+    imageAlt:
+      "Aerial architectural render of Jewel of Coorg, with villas, winding paths and water features set among forested hills",
+    category: "3D Immersive",
+    date: "2026-09-18",
+    author: "Luminexa Team",
+    seo: {
+      title: "Jewel of Coorg: Immersive 3D Property Experience | Luminexa",
+      description:
+        "Discover Jewel of Coorg through Luminexa's immersive property experience, featuring aerial views, villa exploration, floor plans and 360° tours.",
+      keywords: [
+        "immersive 3D real estate",
+        "interactive property walkthrough",
+        "3D villa visualization",
+        "360 virtual tours",
+        "Jewel of Coorg",
+      ],
+    },
+    cta: {
+      text: "Give buyers a clearer view of your next development with an immersive property experience.",
+      href: "/contact-us",
+    },
+    fullDescription: `
+<p>A beautiful architectural render can make someone pause. An interactive experience gives them a reason to explore. For a villa development surrounded by forested hills, that exploration starts with understanding the whole place: how the homes sit within the landscape, where the paths lead and how the shared spaces connect.</p>
+
+<p>For <strong>Jewel of Coorg</strong>, Luminexa Technologies brings those questions into one immersive property experience. Aerial views, selectable villas, individual property views, floor plans and panoramic tours help visitors move from admiring the development to understanding it.</p>
+
+<h2>Start with the landscape</h2>
+<p>The aerial render featured above sets the scene. Clusters of villas follow the terrain, winding routes connect the buildings, and water features break up the greenery. From this viewpoint, the relationship between architecture and its surroundings becomes part of the story.</p>
+
+<p>The Jewel of Coorg experience opens with an aerial introduction to the development. Visitors can look around from different angles and take a closer look at the details. They choose where to spend their attention, exploring the master plan at their own pace.</p>
+
+<h2>Connect the overview to each villa</h2>
+<p>The aerial view is the starting point for a more detailed journey. Selectable villa areas connect the visual presentation to property information, while the flat master plan provides another way to locate a home within the development.</p>
+
+<ul>
+  <li><strong>Explore the site:</strong> See how villas relate to access routes, neighbouring homes and shared spaces.</li>
+  <li><strong>Inspect a villa type:</strong> Open a dedicated rotational view to examine its exterior from different angles.</li>
+  <li><strong>Review the layout:</strong> Bring up the available floor plans alongside the property journey.</li>
+  <li><strong>Look around:</strong> Explore panoramic tours to experience spaces from a different perspective.</li>
+</ul>
+
+<p>These connected views help sales teams explain a project in context. A conversation about a particular home can move from its position in the development to its architectural form and internal layout without assembling that story from separate files.</p>
+
+<h2>See the details in context</h2>
+<p>A home is part of a wider setting. At Jewel of Coorg, the aerial perspective helps visitors understand how each villa sits within the landscape. Moving between the overall development and individual villa views keeps that relationship clear throughout the exploration.</p>
+
+<p>Floor plans bring attention to the arrangement of rooms, while panoramic views offer another way to appreciate the spaces presented. Together, these perspectives help visitors form more specific questions about the homes that interest them.</p>
+
+<h2>A more useful property presentation</h2>
+<p>For a prospective buyer, the value is a connected sense of place. An aerial image explains the setting; a selectable villa gives that setting a specific focus; a floor plan or panorama adds another layer of understanding. Each step answers a different question about the property.</p>
+
+<p>For developers and sales teams, this approach creates a shared visual reference for demonstrations and remote conversations. It supports a more focused discussion about location, layout and design before a site visit.</p>
+
+<h2>Experience Jewel of Coorg with a clearer perspective</h2>
+<p>Jewel of Coorg reflects how we approach immersive property presentations at Luminexa: give people a sense of the place and a useful way to explore it. From the forested surroundings to the layout of an individual villa, each view adds to the story of the development.</p>
+
+<p>The result is a connected journey from the first aerial impression to a closer understanding of a home, helping buyers and sales teams have more informed conversations about Jewel of Coorg.</p>
+`,
+  },
+  {
   slug: "digital-plot-mapping",
   title: "Redefining Real Estate with Digital Plot Mapping & AI",
   shortDescription:
