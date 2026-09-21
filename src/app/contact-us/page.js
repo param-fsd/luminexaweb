@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase";
+import { getTrackingIds, trackConversion } from "@/lib/siteAnalytics";
 import PhoneField, {
   DEFAULT_COUNTRY,
   countryByIso,
@@ -192,9 +193,14 @@ const ContactPage = () => {
         consentDocuments: CONSENT_DOCS,
         status: "new",
         source: "website contact page",
+        /* Joins this enquiry to its browsing session, so the CRM can show the
+           pages and campaign that produced it next to the message itself. */
+        ...getTrackingIds(),
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
+
+      trackConversion("contact_form", { page: "/contact-us" });
 
       setSubmitted(true);
       setForm({

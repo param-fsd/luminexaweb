@@ -22,6 +22,7 @@ import SmoothScroll from "@/components/motion/SmoothScroll";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { trackPageview, startEngagementTracking } from "@/lib/siteAnalytics";
 
 /* -------------------------------------------------------------------------- */
 /*  Cookie Consent (Bottom Right)                                              */
@@ -184,6 +185,15 @@ export default function SiteChrome({ children }) {
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("config", "G-3CM0LCLPFT", { page_path: pathname });
     }
+  }, [pathname]);
+
+  // First-party tracking, in parallel with GA. GA's data can only be read back
+  // from Google as aggregates, so the CRM's Website Traffic page is fed from
+  // our own /api/track instead. Mounted once; the pageview fires per route.
+  useEffect(() => startEngagementTracking(), []);
+
+  useEffect(() => {
+    trackPageview(pathname);
   }, [pathname]);
 
   return (

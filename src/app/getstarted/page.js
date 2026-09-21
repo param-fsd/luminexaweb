@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase";
+import { getTrackingIds, trackConversion } from "@/lib/siteAnalytics";
 import PhoneField, {
   DEFAULT_COUNTRY,
   countryByIso,
@@ -194,9 +195,14 @@ const EnquiryForm = () => {
         projectType: formData.solutionType.trim(),
         source: "website enquiry",
         status: "new",
+        /* Joins this lead to its browsing session, so the CRM can show the
+           pages and campaign that produced it next to the lead itself. */
+        ...getTrackingIds(),
         updatedAt: serverTimestamp(),
         website: "",
       });
+
+      trackConversion("lead_form", { page: "/getstarted" });
 
       setSubmitted(true);
 
