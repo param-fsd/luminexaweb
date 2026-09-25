@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import sanitizeHtml from "sanitize-html";
@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import services from "@/data/serviceData";
 import ImageMappingPage from "@/components/services/ImageMappingPage";
+import ThreeDImmersivePage from "@/components/services/ThreeDImmersivePage";
 import SectionHeader from "@/components/motion/SectionHeader";
 import Marquee from "@/components/motion/Marquee";
 import Counter from "@/components/motion/Counter";
@@ -180,14 +181,14 @@ const SubServiceDetails = () => {
     String(navSections.findIndex((s) => s.id === id) + 1).padStart(2, "0");
 
   if (!service || !subService) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <p className="text-base text-foreground">Sub-service not found</p>
-      </div>
-    );
+    notFound();
   }
 
   /* sub-services with a bespoke layout opt out of the generic template */
+  if (slug === "3d-visualization" && subSlug === "digital-twin") {
+    return <ThreeDImmersivePage subService={subService} />;
+  }
+
   if (slug === "mapping" && subSlug === "image-mapping") {
     return <ImageMappingPage service={service} subService={subService} />;
   }

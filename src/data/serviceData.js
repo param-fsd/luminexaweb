@@ -154,23 +154,21 @@ const services = [
   {
     slug: "3d-visualization",
     title: "3D Visualization",
-    description: "3D modeling, product rendering, animations, and architectural visualization.",
+    description: "Real estate 3D immersive experiences and 3D walkthroughs that bring properties, interiors, and amenities to life.",
     image: "/3d.jpg",
     overview: `
-      <p>We create photorealistic 3D models, animations, walkthroughs, and renderings.
-      Ideal for real estate, engineering, product design, and manufacturing.</p>
+      <p>Help buyers explore your development with interactive 3D immersive experiences and realistic 3D walkthroughs.
+      Showcase homes, commercial spaces, landscaping, and amenities for project launches and property sales.</p>
     `,
     features: [
-      { title: "3D Product Modeling", description: "Detailed models for e-commerce & presentations." },
-      { title: "Architectural Visualization", description: "Interior & exterior renders with lighting & textures." },
-      { title: "3D Animations", description: "Explainer visuals for machines, products & concepts." },
-      { title: "Virtual Walkthroughs", description: "Interactive 3D spaces with camera movement." }
+      { title: "3D Immersive", description: "Interactive project exploration with building, floor, and unit information." },
+      { title: "3D Walkthrough", description: "Cinematic views of interiors, exteriors, landscaping, and amenities." }
     ],
     applications: [
-      "Real estate renders",
-      "E-commerce product demos",
-      "Engineering visualization",
-      "Interior/exterior design"
+      "Residential project launches",
+      "Master plan and unit exploration",
+      "Commercial property presentations",
+      "Interior, exterior, and amenity showcases"
     ],
     label: "3D Visualization",
     icon: "Cube",

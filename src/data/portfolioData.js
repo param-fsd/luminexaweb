@@ -48,14 +48,14 @@ const projects = [
   {
     id: "demo-digital-twin",
     type: "demo",
-    title: "Real estate digital twin",
+    title: "3D Immersive real estate experience",
     sector: "Real Estate",
     summary:
-      "A building model that stays bound to live data — unit availability from CRM, plus occupancy, energy and open tickets pinned to the spaces they belong to.",
-    services: ["Digital Twin", "3D Visualization", "CRM Integration"],
+      "Explore high-rise apartments and villa communities in 3D, preview interior choices, and discover routes through the development.",
+    services: ["3D Immersive", "Interior Customization", "Project Routing"],
     image: "/3d.jpg",
     href: "/services/3d-visualization/digital-twin",
-    linkLabel: "Open the demo",
+    linkLabel: "Explore the experience",
   },
   {
     id: "demo-crm-erp",

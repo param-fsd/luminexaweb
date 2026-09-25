@@ -228,7 +228,7 @@ const EditorialServicePage = ({ content, hero, breadcrumb }) => {
           note={modules.note}
           title={modules.title}
         >
-          <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+          <div className={`grid grid-cols-1 gap-4 md:gap-5 ${modules.columns === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
             {modules.items.map((item, i) => {
               const card = (
                 <article
@@ -241,7 +241,7 @@ const EditorialServicePage = ({ content, hero, breadcrumb }) => {
                       src={item.image}
                       alt={item.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes={modules.columns === 2 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 33vw"}
                       className={`object-cover ${
                         item.subSlug
                           ? "transition-transform duration-500 group-hover:scale-[1.03]"

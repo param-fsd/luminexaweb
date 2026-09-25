@@ -16,10 +16,10 @@ const UPDATES = [
     kicker: "New Capability",
     title: "3D Immersive Experience",
     description:
-      "Step inside projects before they exist. Digital twins and real-time 3D walkthroughs of spaces, products, and layouts — straight in the browser, no app needed.",
-    chips: ["Digital Twins", "Real-time 3D", "360° Walkthroughs"],
+      "Explore apartments and villas in 3D before construction is complete. Discover interior customization, project routing, and immersive walkthroughs.",
+    chips: ["3D Immersive", "Real-time 3D", "360° Walkthroughs"],
     image: "/3d.jpg",
-    imageAlt: "3D digital twin of a villa project rendered on a laptop",
+    imageAlt: "3D immersive visualization of a villa project",
     ctaText: "Explore 3D",
     ctaLink: "/services/3d-visualization",
   },

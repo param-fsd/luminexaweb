@@ -7,8 +7,7 @@
  * hero widget — a console whose module switcher (Sales CRM / Inventory ERP /
  * Finance) drives its KPI tiles and a clickable pipeline.
  *
- * The Modules cards link to the sub-services in src/data/crmerpdevelopment.js;
- * keep the subSlug values in sync with that file.
+ * The Modules cards present the sub-services without navigation links.
  */
 
 import React, { useState } from "react";
@@ -196,7 +195,7 @@ const CONTENT = {
     label: "Modules",
     note: "Three layers, one database.",
     title: "Three layers, one database.",
-    hrefBase: "/services/crm-erp",
+    // Keep these cards visible without linking to sub-service pages.
     items: [
       {
         subSlug: "crm-development",

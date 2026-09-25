@@ -8,7 +8,7 @@
 const nex3dServices = [
   {
     subSlug: "3d-walkthroughs",
-    title: "3D Walkthroughs",
+    title: "3D Walkthrough",
     shortTitle: "Architectural Walkthroughs",
     label: "Architecture",
     heroBadge: "Cinematic Walkthroughs",
@@ -86,194 +86,134 @@ const nex3dServices = [
   },
 
   {
-    subSlug: "digital-twin",
-    title: "Digital Twin",
-    shortTitle: "Real Estate Digital Twins",
-    label: "Real Estate",
-    heroBadge: "Live Building Twins",
-    description:
-      "A live 3D replica of a property, bound to real inventory, sensor and operations data — not a render that goes stale the week it ships.",
-    image: "/map3d.jpg",
-    heroImage: "/map3d.jpg",
-
-    overview: `
-<p>A render is a photograph of an intention. A digital twin is a model wired to the systems that actually run the building, so what you see on screen is what is true right now.</p>
-<p>For a project under sale, that means the 3D model is bound to your CRM: a unit that gets booked turns from available to sold on the model within seconds, on every screen showing it — the sales office, the website, the broker's phone. Nobody sells the same flat twice.</p>
-<p>For a building in operation, the same model carries the live layer: occupancy, energy draw, HVAC state, open maintenance tickets, each attached to the floor or unit it belongs to. Facilities teams stop hunting through spreadsheets to find out which riser a fault is on.</p>
-<p>We build it from your survey, drone capture or BIM, connect it to the systems you already run, and hand over the model and the integration code.</p>
-`,
-
-    highlightTags: [
-      "Live CRM inventory",
-      "BIM & survey accurate",
-      "IoT sensor layer",
-      "Floor & unit drill-down",
-      "Web-based, no install",
+    "subSlug": "digital-twin",
+    "title": "3D Immersive",
+    "shortTitle": "Immersive Real Estate Experiences",
+    "label": "Real Estate",
+    "heroBadge": "Built for real estate developers",
+    "description": "Give your sales and marketing teams an interactive way to present the entire development. Showcase high-rise apartments, villa communities, amenities, landscapes, and interiors in one connected 3D experience for project launches and buyer presentations.",
+    "image": "/immersive-3d-aerial.webp",
+    "heroImage": "/immersive-3d-aerial.webp",
+    "overview": "Present the full scale and vision of your development, from an aerial master plan to individual buildings and interiors. Let buyers explore towers, villas, internal roads, landscaped spaces, clubhouses, and shared amenities in context. Your team can guide the presentation or let prospects explore independently, helping them understand how every part of the project connects before a site visit.",
+    "projectHighlights": [
+      { "title": "The complete master plan", "description": "Show the entire development in 3D, including building placement, project phases, access roads, and open spaces." },
+      { "title": "Buildings, floors & homes", "description": "Take presentations from the project overview into selected towers, apartment layouts, villas, and interiors." },
+      { "title": "Amenities & surroundings", "description": "Showcase clubhouses, recreation areas, gardens, and shared facilities as part of the complete project." },
+      { "title": "Connected project exploration", "description": "Bring project routing and approved interior choices into the same experience for your sales gallery, website, and remote presentations." }
     ],
-
-    stats: [
-      { value: "Live", label: "Inventory, not a nightly export" },
-      { value: "1 month", label: "Typical first twin delivered" },
-      { value: "0", label: "Double-sold units" },
+    "highlightTags": [
+      "Complete project in 3D",
+      "High-rise apartments",
+      "Villa communities",
+      "Interior customization",
+      "Project routing",
+      "Laptop, tablet & mobile"
     ],
-
-    features: [
-      { title: "Live sales inventory", description: "Every unit bound to your CRM — availability, price and hold status update on the model in seconds.", image: "/map3d.jpg" },
-      { title: "Operations layer", description: "Occupancy, energy, HVAC and maintenance tickets attached to the floor and unit they belong to.", image: "/net.jpg" },
-      { title: "As-built accuracy", description: "Built from drone capture, laser survey or your BIM, so the twin matches what was actually constructed.", image: "/drone.jpg" },
-    ],
-
-    benefits: [
-      "One inventory truth across sales office, website and brokers.",
-      "Faults located on the model instead of in a spreadsheet.",
-      "Energy and occupancy read per floor, not per building.",
-      "Handover pack that stays useful after practical completion.",
-      "Runs in a browser — no plugin, no headset, no install.",
-      "Model, integrations and source code handed to you.",
-    ],
-
-    useCases: [
-      { title: "Sales inventory", description: "Live availability across towers, floors and unit types." },
-      { title: "Facilities management", description: "Assets, warranties and tickets pinned to real locations." },
-      { title: "Energy monitoring", description: "Consumption per floor and per tenant, tracked over time." },
-      { title: "Construction progress", description: "Drone capture against programme, month by month." },
-      { title: "Tenant portals", description: "Tenants see their own floor, their own tickets." },
-      { title: "Asset handover", description: "A model the operator inherits instead of a box of PDFs." },
-    ],
-
-    workflow: [
-      { step: "01", title: "Capture the asset", description: "Drone survey, laser scan or your existing BIM, reconciled against the as-built drawings so the geometry is trustworthy." },
-      { step: "02", title: "Bind the data", description: "Units mapped to CRM records, sensors and meters mapped to spaces. This mapping is the twin — the geometry is just how you read it." },
-      { step: "03", title: "Deploy & hand over", description: "Browser-based viewer, role-based access for sales and facilities, then the model, integrations and code handed to you." },
-    ],
-
-    technologies: ["Three.js", "React Three Fiber", "Cesium", "IFC / BIM", "PostgreSQL", "MQTT", "Node.js", "Docker"],
-
-    deliverables: [
-      "As-built 3D model reconciled to drawings",
-      "Unit-to-CRM binding with live status",
-      "Sensor and meter mapping per space",
-      "Browser viewer with role-based access",
-      "Drill-down from building to floor to unit",
-      "Integration and API documentation",
-      "Full source code and model handover",
-    ],
-
-    faqs: [
-      {
-        question: "How is this different from a 3D render or a virtual tour?",
-        answer:
-          "A render and a tour are fixed — they show one moment, and they go out of date. A twin is bound to live data, so unit availability, sensor readings and open tickets are current every time someone opens it.",
-      },
-      {
-        question: "Does it connect to our existing CRM?",
-        answer:
-          "Yes. We bind units to records in whatever you run — our own CRM builds, Salesforce, Zoho, or a custom system. Anything with an API works; where there is none we fall back to scheduled sync and label the last refresh.",
-      },
-      {
-        question: "Do we need sensors installed for this to be useful?",
-        answer:
-          "No. Most real estate twins start with sales inventory only, which needs no hardware at all. The operations layer gets added later if and when the building has meters and BMS worth reading.",
-      },
-      {
-        question: "What does it run on?",
-        answer:
-          "A browser. It works on a sales-office touchscreen, a laptop and a broker's phone without an install, and the level of detail scales down on weaker devices rather than failing.",
-      },
-      {
-        question: "What happens at project handover?",
-        answer:
-          "The operator inherits the model, the data bindings and the source code. It is designed to outlive the sales campaign rather than be switched off at the end of it.",
-      },
-    ],
-
-    cta: {
-      title: "Build the twin of your project.",
-      description:
-        "Bring us the drawings and your inventory system. We'll scope a twin that keeps them in sync.",
-      primaryText: "Book a consultation",
-      primaryLink: "/contact-us",
-      secondaryText: "View portfolio",
-      secondaryLink: "/portfolio",
+    "compatibility": {
+      "title": "One project. Every screen. Simple to explore.",
+      "description": "Present your complete project in 3D on laptops, tablets, and mobile phones. Give your sales team and buyers a seamless browser experience on everyday devices, without high-end hardware or complex setup.",
+      "devices": [
+        { "title": "Laptop", "description": "Lead detailed project presentations in the sales office or during remote meetings." },
+        { "title": "Tablet", "description": "Bring interactive project exploration into client meetings and on-site conversations." },
+        { "title": "Mobile", "description": "Share a project link so prospects can explore the development wherever they are." }
+      ],
+      "highlights": ["No high-end configuration needed", "Open in a browser", "No app installation", "Simple, seamless exploration"]
     },
-  },
-
-  {
-    subSlug: "product-visualization",
-    title: "Product Visualization",
-    shortTitle: "3D Product & Packaging",
-    label: "Product",
-    heroBadge: "3D Product Modeling",
-    description:
-      "Photo-real product models for listings, campaigns and AR — cheaper to change than a reshoot.",
-    image: "/three.png",
-    heroImage: "/three.png",
-
-    overview: `
-<p>Once a product exists as a 3D model, a new colourway, a new angle or a new campaign background costs a render rather than a studio day. That is usually the whole business case.</p>
-<p>We model from your CAD or from physical samples, build materials that hold up under close inspection, and deliver whatever the channel needs — stills, turntables, exploded views, or a GLB you can drop into a product page for AR.</p>
-`,
-
-    highlightTags: ["PBR materials", "Turntables", "Exploded views", "AR-ready GLB", "Unlimited variants"],
-
-    stats: [
-      { value: "∞", label: "Colourways from one model" },
-      { value: "4K", label: "Stills and turntable output" },
-      { value: "AR", label: "GLB ready for product pages" },
+    "features": [
+      {
+        "title": "High-rise apartment projects in 3D",
+        "description": "Explore the development from the skyline down to an individual apartment. Help buyers understand tower placement, floor layouts, shared spaces, and how their home connects to the wider community.",
+        "image": "/3d.jpg",
+        "points": [
+          "Explore towers, floors, and apartment layouts",
+          "View entrances, podiums, landscaped areas, and amenities",
+          "Move from the project overview into selected home interiors"
+        ]
+      },
+      {
+        "title": "Villa projects in 3D",
+        "description": "Present the character of every villa alongside the community around it. Let buyers explore home designs, gardens, internal roads, and shared facilities before visiting the site.",
+        "image": "/immersive-3d-aerial.webp",
+        "points": [
+          "Explore villa exteriors, layouts, and private outdoor spaces",
+          "Understand each home within the community master plan",
+          "Discover access roads, green spaces, and lifestyle amenities"
+        ]
+      }
     ],
-
-    features: [
-      { title: "Product modeling", description: "Built from CAD or from a physical sample, accurate to the tolerances that show.", image: "/three.png" },
-      { title: "Turntables & exploded views", description: "Rotations and breakdowns that explain construction better than copy does.", image: "/3d.jpg" },
-      { title: "AR-ready assets", description: "Optimised GLB so shoppers can place the product in their own room.", image: "/nexar.jpg" },
-    ],
-
-    benefits: [
-      "New variants cost a render, not a reshoot.",
-      "Consistent lighting across an entire catalogue.",
-      "Angles that are impossible to photograph.",
-      "AR previews cut returns on size-sensitive products.",
-      "Assets you own and can re-render forever.",
-    ],
-
-    useCases: [
-      { title: "E-commerce listings", description: "A consistent catalogue shot on every product." },
-      { title: "Campaign imagery", description: "Hero visuals without booking a studio." },
-      { title: "Packaging mockups", description: "Approve artwork on the real form before print." },
-      { title: "Technical explainers", description: "Exploded views for manuals and training." },
-    ],
-
-    workflow: [
-      { step: "01", title: "Model", description: "From CAD where it exists, from measurements and photos where it does not." },
-      { step: "02", title: "Material & light", description: "PBR materials and a lighting rig reused across the catalogue for consistency." },
-      { step: "03", title: "Render & optimise", description: "Stills, turntables and an optimised GLB for AR, with source files handed over." },
-    ],
-
-    technologies: ["Blender", "KeyShot", "Substance", "Three.js", "glTF / GLB", "Photoshop"],
-
-    deliverables: [
-      "Production 3D model with PBR materials",
-      "4K stills at agreed angles",
-      "Turntable animation",
-      "Exploded or cutaway views where useful",
-      "Optimised GLB for web and AR",
-      "Editable source files",
-    ],
-
-    faqs: [
-      { question: "Do you need the physical product?", answer: "Helpful but not essential. CAD is ideal; failing that we work from a sample, or from measurements and detailed photographs." },
-      { question: "How does this compare to photography on cost?", answer: "The first product usually costs about the same as a shoot. Every variant and re-angle after that is dramatically cheaper, which is where it pays back." },
-      { question: "Will it work for AR on our product page?", answer: "Yes — we deliver an optimised GLB sized for mobile, which works with the AR viewers built into iOS and Android." },
-    ],
-
-    cta: {
-      title: "Model it once, shoot it forever.",
-      description: "Send us a product and we'll come back with a per-SKU number.",
-      primaryText: "Book a consultation",
-      primaryLink: "/contact-us",
-      secondaryText: "View portfolio",
-      secondaryLink: "/portfolio",
+    "customization": {
+      "title": "Present your interior options interactively.",
+      "description": "Equip your sales team to demonstrate approved finishes, material palettes, and interior packages within the 3D property. Let buyers compare available combinations while your team explains the options offered for the project.",
+      "image": "/interior-customization-bedroom.jpeg",
+      "options": [
+        {
+          "title": "Wall colors & finishes",
+          "description": "Explore curated paint palettes and feature-wall finishes."
+        },
+        {
+          "title": "Flooring & materials",
+          "description": "Compare selected tile, wood, and surface combinations."
+        },
+        {
+          "title": "Furniture & layouts",
+          "description": "Preview agreed furniture styles and arrangements in the room."
+        },
+        {
+          "title": "Kitchen & cabinetry",
+          "description": "Explore cabinet finishes and countertop options from the project palette."
+        }
+      ],
+      "note": "Available choices are configured around your approved specifications and interior packages. Visual previews help buyers compare options; final inclusions are confirmed by your sales team."
     },
+    "routing": {
+      "title": "Show your project. Connect its surroundings.",
+      "description": "Give buyers a complete location view with project boundaries, surrounding areas, and nearby landmarks. Our interactive routing system lets them select a destination in a single click to display the road route, distance in kilometres, and estimated travel duration. Help your sales team explain how the development connects to the places that matter.",
+      "steps": [
+        {
+          "title": "Explore the project & boundaries",
+          "description": "Locate the complete development, understand its boundaries, and discover surrounding areas and nearby landmarks."
+        },
+        {
+          "title": "Select a destination",
+          "description": "Choose a nearby landmark or destination in one click to request a road route from the project."
+        },
+        {
+          "title": "See the route, kilometres & time",
+          "description": "View the road connection on the map with distance and estimated travel duration, updated when a new destination is selected."
+        }
+      ],
+      "note": "Routes are fetched on destination selection. Travel times are estimates from the routing service."
+    },
+    "faqs": [
+      {
+        "question": "Can one experience include apartments and villas?",
+        "answer": "Yes. A mixed residential development can bring towers, apartments, villas, and shared amenities together within one project experience. The level of detail and accessible interiors are agreed during planning."
+      },
+      {
+        "question": "What can buyers customize inside the home?",
+        "answer": "The experience can include wall colors, flooring, furniture arrangements, cabinetry, and other agreed finishes. We build the selection around your approved design options and sales packages."
+      },
+      {
+        "question": "How does the routing system work?",
+        "answer": "The map presents the project, its boundaries, and surrounding landmarks. Selecting a destination requests a road route from the project and displays the distance in kilometres and estimated travel duration. Selecting another destination updates the route and journey details."
+      },
+      {
+        "question": "Can we include unit details and availability?",
+        "answer": "Yes. Property details can appear alongside the 3D experience. Availability can be connected to a compatible inventory or CRM system, with fields and update frequency agreed during scoping."
+      },
+      {
+        "question": "What do you need to build our experience?",
+        "answer": "Share your master plan, architectural drawings or 3D models, interior references, material options, and the routes you want visitors to explore. We use these to define the experience and delivery plan."
+      }
+    ],
+    "cta": {
+      "title": "Bring your complete development into 3D.",
+      "description": "Share your master plan and project launch goals. We will build an immersive presentation around your development, interior options, and project routes to support your sales and marketing teams.",
+      "primaryText": "Discuss your project",
+      "primaryLink": "/contact-us",
+      "secondaryText": "View portfolio",
+      "secondaryLink": "/portfolio"
+    }
   },
 ];
 
